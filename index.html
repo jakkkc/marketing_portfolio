@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get in Touch</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2c3e50;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #2c3e50;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border 0.3s;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      textarea:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 150px;
+      }
+
+      .submit-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: #2980b9;
+      }
+
+      .status-message {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        display: none;
+      }
+
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        display: block;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 20px;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Get in Touch</h1>
+      <form
+        id="contactForm"
+        class="contact-form"
+        action="https://formsubmit.co/jacmwaniki@gmail.com"
+        method="POST"
+      >
+        <!-- FormSubmit.co settings -->
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="?success=true" />
+        <input type="hidden" name="_template" value="table" />
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message</button>
+
+        <div id="statusMessage" class="status-message"></div>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const contactForm = document.getElementById("contactForm");
+        const statusMessage = document.getElementById("statusMessage");
+
+        // Check for success parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has("success")) {
+          statusMessage.textContent =
+            "Thank you for your message! We will get back to you soon.";
+          statusMessage.className = "status-message success";
+
+          // Clear the form
+          contactForm.reset();
+
+          // Remove success parameter from URL
+          const newUrl = window.location.pathname;
+          window.history.replaceState({}, document.title, newUrl);
+        }
+
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simple client-side validation
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const subject = document.getElementById("subject").value.trim();
+          const message = document.getElementById("message").value.trim();
+
+          if (!name || !email || !subject || !message) {
+            statusMessage.textContent = "Please fill in all fields.";
+            statusMessage.className = "status-message error";
+            return;
+          }
+
+          if (!validateEmail(email)) {
+            statusMessage.textContent = "Please enter a valid email address.";
+            statusMessage.className = "status-message error";
+            return;
+          }
+
+          // If validation passes, submit the form
+          this.submit();
+        });
+
+        function validateEmail(email) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(email);
+        }
+      });
+    </script>
+  </body>
+</html>
