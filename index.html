@@ -3,68 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Get in Touch</title>
+    <title>Contact Us | Get in Touch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --primary: #13265c;
+        --primary-light: #1e3a8a;
+        --white: #f8fafc;
+        --off-white: #eff2f7;
+        --light-gray: #cbd5e1;
+        --gray: #94a3b8;
+        --dark-gray: #475569;
+        --success: #10b981;
+        --error: #ef4444;
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: "Arial", sans-serif;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
       }
 
       body {
-        background-color: #f5f5f5;
-        color: #333;
+        background-color: var(--off-white);
+        color: var(--primary);
         line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
       }
 
       .container {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 640px;
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(19, 38, 92, 0.1);
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .form-header {
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 2rem;
+        text-align: center;
       }
 
       h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #2c3e50;
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .form-subtitle {
+        color: var(--light-gray);
+        font-weight: 300;
+        font-size: 1rem;
       }
 
       .contact-form {
+        padding: 2rem;
         display: flex;
         flex-direction: column;
       }
 
       .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 1.5rem;
+        position: relative;
       }
 
       label {
         display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #2c3e50;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--primary);
+        font-size: 0.875rem;
       }
 
       input[type="text"],
       input[type="email"],
       textarea {
         width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 16px;
-        transition: border 0.3s;
+        padding: 0.875rem 1rem;
+        border: 1px solid var(--light-gray);
+        border-radius: 8px;
+        font-size: 0.9375rem;
+        transition: all 0.2s ease;
+        background-color: var(--off-white);
       }
 
       input[type="text"]:focus,
       input[type="email"]:focus,
       textarea:focus {
-        border-color: #3498db;
+        border-color: var(--primary);
         outline: none;
+        box-shadow: 0 0 0 3px rgba(19, 38, 92, 0.1);
+        background-color: var(--white);
       }
 
       textarea {
@@ -73,51 +117,110 @@
       }
 
       .submit-btn {
-        background-color: #3498db;
-        color: white;
+        background-color: var(--primary);
+        color: var(--white);
         border: none;
-        padding: 12px 20px;
-        font-size: 16px;
-        border-radius: 4px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background-color 0.3s;
+        transition: all 0.2s ease;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .submit-btn:hover {
-        background-color: #2980b9;
+        background-color: var(--primary-light);
+        transform: translateY(-1px);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
       }
 
       .status-message {
-        margin-top: 20px;
-        padding: 10px;
-        border-radius: 4px;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: 8px;
         text-align: center;
+        font-size: 0.9375rem;
         display: none;
       }
 
       .success {
-        background-color: #d4edda;
-        color: #155724;
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success);
         display: block;
+        border: 1px solid rgba(16, 185, 129, 0.2);
       }
 
       .error {
-        background-color: #f8d7da;
-        color: #721c24;
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--error);
         display: block;
+        border: 1px solid rgba(239, 68, 68, 0.2);
       }
 
-      @media (max-width: 600px) {
-        .container {
-          margin: 20px;
-          padding: 15px;
+      .form-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--gray);
+        font-size: 0.8125rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
         }
+
+        .container {
+          border-radius: 12px;
+        }
+
+        .form-header,
+        .contact-form {
+          padding: 1.5rem;
+        }
+      }
+
+      /* Modern floating label effect */
+      .floating-label {
+        position: relative;
+      }
+
+      .floating-label label {
+        position: absolute;
+        top: 0.875rem;
+        left: 1rem;
+        color: var(--gray);
+        transition: all 0.2s ease;
+        pointer-events: none;
+      }
+
+      .floating-label input:focus + label,
+      .floating-label input:not(:placeholder-shown) + label,
+      .floating-label textarea:focus + label,
+      .floating-label textarea:not(:placeholder-shown) + label {
+        transform: translateY(-1.5rem) scale(0.85);
+        transform-origin: left top;
+        color: var(--primary);
+        background: var(--white);
+        padding: 0 0.25rem;
+        left: 0.75rem;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Get in Touch</h1>
+      <div class="form-header">
+        <h1>Get in Touch</h1>
+        <p class="form-subtitle">We'd love to hear from you</p>
+      </div>
+
       <form
         id="contactForm"
         class="contact-form"
@@ -128,30 +231,70 @@
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="?success=true" />
         <input type="hidden" name="_template" value="table" />
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Contact Form Submission"
+        />
 
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
+        <div class="form-group floating-label">
+          <input type="text" id="name" name="name" required placeholder=" " />
+          <label for="name">Full Name</label>
         </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+        <div class="form-group floating-label">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder=" "
+          />
+          <label for="email">Email Address</label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group floating-label">
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            required
+            placeholder=" "
+          />
           <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" required />
         </div>
 
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+        <div class="form-group floating-label">
+          <textarea
+            id="message"
+            name="message"
+            required
+            placeholder=" "
+          ></textarea>
+          <label for="message">Your Message</label>
         </div>
 
-        <button type="submit" class="submit-btn">Send Message</button>
+        <button type="submit" class="submit-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Send Message
+        </button>
 
         <div id="statusMessage" class="status-message"></div>
+
+        <div class="form-footer">We typically respond within 24 hours</div>
       </form>
     </div>
 
@@ -196,8 +339,20 @@
             return;
           }
 
+          // Show loading state
+          const submitBtn = contactForm.querySelector(".submit-btn");
+          submitBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+                    </svg>
+                    Sending...
+                `;
+          submitBtn.disabled = true;
+
           // If validation passes, submit the form
-          this.submit();
+          setTimeout(() => {
+            this.submit();
+          }, 1000);
         });
 
         function validateEmail(email) {
