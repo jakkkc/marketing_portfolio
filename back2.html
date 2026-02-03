@@ -14,51 +14,54 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      /* Dark mode color palette */
+      /* Color palette (shared) */
       --primary: #0ea5e9;
       --primary-dark: #0284c7;
       --primary-light: #7dd3fc;
       --accent: #f472b6;
       --accent-light: #f9a8d4;
+      --white: #ffffff;
+      
+      /* Light mode specific */
+      --bg-color: #f8fafc;
+      --surface-color: #ffffff;
+      --card-color: #ffffff;
+      --text-color: #1e293b;
+      --text-secondary: #475569;
+      --light-gray: #e2e8f0;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      --gradient-dark: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      
+      /* Dark mode color values (not used directly in light mode) */
       --dark-bg: #0f172a;
       --dark-surface: #1e293b;
       --dark-card: #334155;
       --dark-text: #f1f5f9;
       --dark-text-secondary: #cbd5e1;
-      --light-gray: #475569;
-      --white: #ffffff;
-      --black: #000000;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.3);
-      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.1);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-      --glass-bg: rgba(30, 41, 59, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      --gradient-dark: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-card) 100%);
       
-      /* Light mode variables (initialized as same as dark) */
+      /* Animation */
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+
+    /* Dark mode overrides */
+    .dark-mode {
       --bg-color: var(--dark-bg);
       --surface-color: var(--dark-surface);
       --card-color: var(--dark-card);
       --text-color: var(--dark-text);
       --text-secondary: var(--dark-text-secondary);
-      --glass-bg-color: var(--glass-bg);
-      --glass-border-color: var(--glass-border);
-    }
-
-    /* Light mode theme */
-    body.light-mode {
-      --bg-color: #f8fafc;
-      --surface-color: #ffffff;
-      --card-color: #f1f5f9;
-      --text-color: #0f172a;
-      --text-secondary: #475569;
-      --glass-bg-color: rgba(255, 255, 255, 0.7);
-      --glass-border-color: rgba(0, 0, 0, 0.08);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.1);
-      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.03);
+      --light-gray: #475569;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.3);
+      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.1);
+      --glass-bg: rgba(30, 41, 59, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --gradient-dark: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-card) 100%);
     }
 
     * {
@@ -75,47 +78,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      transition: background-color 0.5s ease, color 0.5s ease;
-    }
-
-    /* Theme toggle button */
-    .theme-toggle {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
-      z-index: 1001;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--glass-bg-color);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border-color);
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: var(--shadow);
-    }
-
-    .theme-toggle:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .theme-toggle i {
-      font-size: 1.2rem;
-      transition: transform 0.5s ease;
-    }
-
-    .theme-toggle .fa-sun {
-      color: #f59e0b;
-    }
-
-    .theme-toggle .fa-moon {
-      color: #0ea5e9;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Dynamic Background Animation */
@@ -133,13 +96,12 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(40px);
-      opacity: 0.15;
-      animation: float 25s infinite linear;
-      transition: opacity 0.5s ease;
+      opacity: 0.1;
+      animation: float 20s infinite linear;
     }
 
-    body.light-mode .shape {
-      opacity: 0.08;
+    .dark-mode .shape {
+      opacity: 0.3;
     }
 
     .shape-1 {
@@ -148,7 +110,7 @@
       background: var(--primary);
       top: 10%;
       left: 5%;
-      animation-duration: 30s;
+      animation-duration: 25s;
     }
 
     .shape-2 {
@@ -157,7 +119,7 @@
       background: var(--accent);
       top: 60%;
       right: 10%;
-      animation-duration: 35s;
+      animation-duration: 30s;
       animation-delay: -5s;
     }
 
@@ -167,7 +129,7 @@
       background: #7c3aed;
       bottom: 10%;
       left: 20%;
-      animation-duration: 40s;
+      animation-duration: 35s;
       animation-delay: -10s;
     }
 
@@ -177,7 +139,7 @@
       background: var(--primary-light);
       top: 20%;
       right: 20%;
-      animation-duration: 45s;
+      animation-duration: 40s;
       animation-delay: -15s;
     }
 
@@ -186,34 +148,14 @@
         transform: translate(0, 0) rotate(0deg);
       }
       25% {
-        transform: translate(30px, 30px) rotate(90deg);
+        transform: translate(20px, 20px) rotate(90deg);
       }
       50% {
-        transform: translate(0, 60px) rotate(180deg);
+        transform: translate(0, 40px) rotate(180deg);
       }
       75% {
-        transform: translate(-30px, 30px) rotate(270deg);
+        transform: translate(-20px, 20px) rotate(270deg);
       }
-    }
-
-    /* Mesh gradient overlay */
-    .mesh-gradient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.15;
-      background: 
-        radial-gradient(circle at 20% 30%, var(--primary) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, var(--accent) 0%, transparent 40%),
-        radial-gradient(circle at 40% 80%, #7c3aed 0%, transparent 40%);
-      transition: opacity 0.5s ease;
-    }
-
-    body.light-mode .mesh-gradient {
-      opacity: 0.05;
     }
 
     /* Interactive Foreground Elements */
@@ -231,18 +173,17 @@
       position: absolute;
       border-radius: 20px;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: var(--shadow-light);
       transition: transform 0.1s linear;
       pointer-events: none;
       z-index: -1;
     }
 
-    body.light-mode .floating-element {
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+    .dark-mode .floating-element {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .floating-1 {
@@ -274,17 +215,17 @@
         transform: translateY(0) rotate(0deg);
       }
       50% {
-        transform: translateY(-30px) rotate(180deg);
+        transform: translateY(-20px) rotate(180deg);
       }
     }
 
     /* Glassmorphism base styles */
     .glass-card {
-      background: var(--glass-bg-color);
+      background: var(--glass-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 20px;
-      border: 1px solid var(--glass-border-color);
+      border: 1px solid var(--glass-border);
       box-shadow: var(--shadow);
       transition: var(--transition);
     }
@@ -304,25 +245,24 @@
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
       color: var(--text-color);
-      transition: color 0.5s ease;
     }
 
     /* Navigation */
     .navbar {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(248, 250, 252, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background-color 0.5s ease, border-color 0.5s ease;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-    body.light-mode .navbar {
-      background: rgba(248, 250, 252, 0.8);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    .dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-container {
@@ -354,6 +294,7 @@
     .nav-links {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
 
     .nav-links a {
@@ -366,7 +307,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary-light);
+      color: var(--primary);
     }
 
     .nav-links a::after {
@@ -384,13 +325,48 @@
       width: 100%;
     }
 
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      transition: var(--transition);
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(14, 165, 233, 0.2);
+      transform: rotate(30deg) scale(1.1);
+    }
+
+    .dark-mode .theme-toggle {
+      color: var(--primary-light);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+    }
+
     .mobile-menu-btn {
       display: none;
       background: none;
       border: none;
       font-size: 1.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .dark-mode .mobile-menu-btn {
+      color: var(--primary-light);
     }
 
     /* Hero Section */
@@ -416,11 +392,6 @@
       opacity: 0.1;
       z-index: -1;
       filter: blur(60px);
-      transition: opacity 0.5s ease;
-    }
-
-    body.light-mode .hero::before {
-      opacity: 0.05;
     }
 
     .hero-content {
@@ -433,7 +404,7 @@
       font-weight: 800;
       margin-bottom: 1.5rem;
       line-height: 1.2;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -443,7 +414,6 @@
       color: var(--text-secondary);
       margin-bottom: 2.5rem;
       max-width: 600px;
-      transition: color 0.5s ease;
     }
 
     .trust-badge {
@@ -455,13 +425,6 @@
       margin-top: 1rem;
       border: 1px solid rgba(14, 165, 233, 0.2);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: background-color 0.5s ease, border-color 0.5s ease;
-    }
-
-    body.light-mode .trust-badge {
-      background: rgba(14, 165, 233, 0.05);
-      border: 1px solid rgba(14, 165, 233, 0.1);
     }
 
     .trust-badge i {
@@ -503,8 +466,12 @@
 
     .btn-outline {
       border: 2px solid var(--primary);
-      color: var(--primary-light);
+      color: var(--primary);
       background: transparent;
+    }
+
+    .dark-mode .btn-outline {
+      color: var(--primary-light);
     }
 
     .btn-outline:hover {
@@ -526,13 +493,9 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: var(--shadow-hover);
-      border: 5px solid rgba(255, 255, 255, 0.1);
+      border: 5px solid var(--glass-border);
       transition: var(--transition);
       background: var(--surface-color);
-    }
-
-    body.light-mode .profile-pic {
-      border: 5px solid rgba(0, 0, 0, 0.05);
     }
 
     .hero-image:hover .profile-pic {
@@ -584,6 +547,10 @@
       border-top: 4px solid var(--accent);
     }
 
+    .service-card {
+      composes: glass-card;
+    }
+
     .service-card:hover {
       transform: translateY(-10px) scale(1.02);
       box-shadow: var(--shadow-hover);
@@ -592,21 +559,28 @@
 
     .service-icon {
       font-size: 3rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .service-card h3 {
+    .dark-mode .service-icon {
       color: var(--primary-light);
+    }
+
+    .service-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .service-card h3 {
+      color: var(--primary-light);
     }
 
     .service-card p {
       flex-grow: 1;
       margin-bottom: 2rem;
       color: var(--text-secondary);
-      transition: color 0.5s ease;
     }
 
     .service-price {
@@ -628,7 +602,6 @@
       align-items: center;
       gap: 0.75rem;
       color: var(--text-secondary);
-      transition: color 0.5s ease;
     }
 
     .service-features li i {
@@ -650,6 +623,10 @@
       border-top: 4px solid var(--accent);
     }
 
+    .client-card {
+      composes: glass-card;
+    }
+
     .client-card:hover {
       transform: translateY(-10px);
       box-shadow: var(--shadow-hover);
@@ -657,14 +634,26 @@
 
     .client-logo {
       font-size: 2.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .client-card h3 {
+    .dark-mode .client-logo {
       color: var(--primary-light);
+    }
+
+    .client-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .client-card h3 {
+      color: var(--primary-light);
+    }
+
+    .client-card p {
+      color: var(--text-secondary);
     }
 
     .social-platforms {
@@ -710,6 +699,10 @@
       margin-top: 2rem;
     }
 
+    .case-study-container {
+      composes: glass-card;
+    }
+
     .case-study-container:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
@@ -721,17 +714,16 @@
       align-items: center;
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-      transition: border-color 0.5s ease;
-    }
-
-    body.light-mode .case-study-header {
-      border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 2px solid var(--glass-border);
     }
 
     .case-study-title {
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 1.8rem;
+    }
+
+    .dark-mode .case-study-title {
+      color: var(--primary-light);
     }
 
     .case-study-date {
@@ -740,11 +732,6 @@
       background: rgba(244, 114, 182, 0.1);
       padding: 0.5rem 1rem;
       border-radius: 50px;
-      transition: background-color 0.5s ease;
-    }
-
-    body.light-mode .case-study-date {
-      background: rgba(244, 114, 182, 0.05);
     }
 
     .case-study-highlights {
@@ -755,17 +742,16 @@
     }
 
     .highlight-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       text-align: center;
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
-    body.light-mode .highlight-card {
-      background: rgba(241, 245, 249, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+    .dark-mode .highlight-card {
+      background: rgba(30, 41, 59, 0.5);
     }
 
     .highlight-card:hover {
@@ -781,8 +767,12 @@
     }
 
     .highlight-label {
-      color: var(--primary-light);
+      color: var(--primary);
       font-weight: 600;
+    }
+
+    .dark-mode .highlight-label {
+      color: var(--primary-light);
     }
 
     .recommendations-grid {
@@ -793,24 +783,27 @@
     }
 
     .recommendation-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       border-left: 4px solid var(--primary);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
-    body.light-mode .recommendation-card {
-      background: rgba(241, 245, 249, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+    .dark-mode .recommendation-card {
+      background: rgba(30, 41, 59, 0.5);
     }
 
     .recommendation-card h4 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
+    }
+
+    .dark-mode .recommendation-card h4 {
+      color: var(--primary-light);
     }
 
     /* About Section */
@@ -819,6 +812,10 @@
       gap: 4rem;
       align-items: center;
       padding: 3rem;
+    }
+
+    .about-content {
+      composes: glass-card;
     }
 
     .about-content:hover {
@@ -835,7 +832,6 @@
       font-size: 1.1rem;
       line-height: 1.8;
       color: var(--text-secondary);
-      transition: color 0.5s ease;
     }
 
     .about-image {
@@ -849,11 +845,7 @@
       border-radius: 15px;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    body.light-mode .about-image img {
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
     .about-image img:hover {
@@ -876,6 +868,10 @@
       padding: 2.5rem;
     }
 
+    .process-step {
+      composes: glass-card;
+    }
+
     .process-step:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
@@ -896,15 +892,18 @@
     }
 
     .step-content h3 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .step-content h3 {
+      color: var(--primary-light);
     }
 
     .step-content p {
       color: var(--text-secondary);
       line-height: 1.7;
-      transition: color 0.5s ease;
     }
 
     /* Testimonials Section */
@@ -918,6 +917,10 @@
     .testimonial-card {
       padding: 2.5rem;
       position: relative;
+    }
+
+    .testimonial-card {
+      composes: glass-card;
     }
 
     .testimonial-card:hover {
@@ -941,7 +944,6 @@
       margin-bottom: 1.5rem;
       color: var(--text-secondary);
       line-height: 1.7;
-      transition: color 0.5s ease;
     }
 
     .testimonial-author {
@@ -964,14 +966,17 @@
     }
 
     .author-info h4 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 0.25rem;
+    }
+
+    .dark-mode .author-info h4 {
+      color: var(--primary-light);
     }
 
     .author-info p {
       color: var(--text-secondary);
       font-size: 0.9rem;
-      transition: color 0.5s ease;
     }
 
     /* Projects Section */
@@ -986,6 +991,10 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+    }
+
+    .project-card {
+      composes: glass-card;
     }
 
     .project-card:hover {
@@ -1014,6 +1023,10 @@
     .project-title {
       font-size: 1.4rem;
       margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .project-title {
       color: var(--primary-light);
     }
 
@@ -1022,7 +1035,6 @@
       margin-bottom: 1.5rem;
       flex-grow: 1;
       font-size: 1.05rem;
-      transition: color 0.5s ease;
     }
 
     .project-links {
@@ -1035,12 +1047,16 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
       transition: var(--transition);
       padding: 0.5rem 0;
+    }
+
+    .dark-mode .project-link {
+      color: var(--primary-light);
     }
 
     .project-link:hover {
@@ -1068,6 +1084,10 @@
       border-left: 4px solid var(--accent);
     }
 
+    .contact-card {
+      composes: glass-card;
+    }
+
     .contact-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
@@ -1087,6 +1107,10 @@
 
     .contact-details h3 {
       margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .contact-details h3 {
       color: var(--primary-light);
     }
 
@@ -1107,6 +1131,10 @@
       width: 100%;
       overflow: hidden;
       border-left: 4px solid var(--primary);
+    }
+
+    .container {
+      composes: glass-card;
     }
 
     .container:hover {
@@ -1148,8 +1176,12 @@
       display: block;
       margin-bottom: 0.6rem;
       font-weight: 600;
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 0.95rem;
+    }
+
+    .dark-mode label {
+      color: var(--primary-light);
     }
 
     input[type="text"],
@@ -1158,21 +1190,19 @@
     textarea {
       width: 100%;
       padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
       border-radius: 10px;
       font-size: 1rem;
       transition: var(--transition);
-      background-color: rgba(30, 41, 59, 0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       color: var(--text-color);
     }
 
-    body.light-mode input[type="text"],
-    body.light-mode input[type="email"],
-    body.light-mode select,
-    body.light-mode textarea {
-      background-color: rgba(241, 245, 249, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      color: var(--text-color);
+    .dark-mode input[type="text"],
+    .dark-mode input[type="email"],
+    .dark-mode select,
+    .dark-mode textarea {
+      background-color: rgba(30, 41, 59, 0.5);
     }
 
     input[type="text"]:focus,
@@ -1182,14 +1212,13 @@
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
-      background-color: rgba(30, 41, 59, 0.8);
     }
 
-    body.light-mode input[type="text"]:focus,
-    body.light-mode input[type="email"]:focus,
-    body.light-mode select:focus,
-    body.light-mode textarea:focus {
-      background-color: rgba(241, 245, 249, 0.8);
+    .dark-mode input[type="text"]:focus,
+    .dark-mode input[type="email"]:focus,
+    .dark-mode select:focus,
+    .dark-mode textarea:focus {
+      background-color: rgba(30, 41, 59, 0.8);
     }
 
     textarea {
@@ -1233,7 +1262,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .success-message svg {
@@ -1253,7 +1281,6 @@
       color: #ef4444;
       border: 1px solid rgba(239, 68, 68, 0.2);
       display: none;
-      transition: background-color 0.5s ease, border-color 0.5s ease;
     }
 
     .form-footer {
@@ -1261,7 +1288,6 @@
       margin-top: 1.8rem;
       color: var(--text-secondary);
       font-size: 0.9rem;
-      transition: color 0.5s ease;
     }
 
     /* Footer */
@@ -1270,12 +1296,7 @@
       color: var(--text-color);
       padding: 3rem 2rem;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-    }
-
-    body.light-mode .footer {
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-top: 1px solid var(--glass-border);
     }
 
     .social-links {
@@ -1286,7 +1307,7 @@
     }
 
     .social-link {
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 1.8rem;
       transition: var(--transition);
       background: rgba(14, 165, 233, 0.1);
@@ -1299,8 +1320,8 @@
       text-decoration: none;
     }
 
-    body.light-mode .social-link {
-      background: rgba(14, 165, 233, 0.05);
+    .dark-mode .social-link {
+      color: var(--primary-light);
     }
 
     .social-link:hover {
@@ -1313,7 +1334,6 @@
       color: var(--text-secondary);
       font-size: 0.95rem;
       margin-top: 1.5rem;
-      transition: color 0.5s ease;
     }
 
     /* Animation for checkmark */
@@ -1337,20 +1357,13 @@
     .stats {
       background: var(--gradient-dark);
       padding: 4rem 2rem;
-      color: var(--white);
+      color: var(--text-color);
       text-align: center;
       margin: 4rem auto;
       border-radius: 20px;
       box-shadow: var(--shadow);
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background 0.5s ease, border-color 0.5s ease;
-    }
-
-    body.light-mode .stats {
-      background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      color: var(--text-color);
+      border: 1px solid var(--glass-border);
     }
 
     .stats-container {
@@ -1383,26 +1396,19 @@
     /* CTA Section */
     .cta-section {
       background: var(--gradient-dark);
-      color: white;
+      color: var(--text-color);
       text-align: center;
       padding: 5rem 2rem;
       border-radius: 20px;
       margin: 4rem auto;
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: background 0.5s ease, border-color 0.5s ease;
-    }
-
-    body.light-mode .cta-section {
-      background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      color: var(--text-color);
+      border: 1px solid var(--glass-border);
     }
 
     .cta-title {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1415,7 +1421,6 @@
       margin-right: auto;
       opacity: 0.9;
       color: var(--text-secondary);
-      transition: color 0.5s ease;
     }
 
     .cta-buttons {
@@ -1470,18 +1475,18 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(248, 250, 252, 0.95);
         backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 999;
       }
 
-      body.light-mode .nav-links {
-        background: rgba(248, 250, 252, 0.95);
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      .dark-mode .nav-links {
+        background: rgba(15, 23, 42, 0.95);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .nav-links.active {
@@ -1490,6 +1495,10 @@
 
       .mobile-menu-btn {
         display: block;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
       }
 
       .hero-title {
@@ -1529,13 +1538,6 @@
       .cta-buttons {
         flex-direction: column;
         align-items: center;
-      }
-      
-      .theme-toggle {
-        top: 1rem;
-        right: 1rem;
-        width: 45px;
-        height: 45px;
       }
     }
 
@@ -1592,11 +1594,6 @@
 </head>
 
 <body>
-  <!-- Theme Toggle Button -->
-  <button class="theme-toggle" id="themeToggle">
-    <i class="fas fa-moon"></i>
-  </button>
-
   <!-- Dynamic Background -->
   <div class="background-shapes">
     <div class="shape shape-1"></div>
@@ -1604,9 +1601,6 @@
     <div class="shape shape-3"></div>
     <div class="shape shape-4"></div>
   </div>
-
-  <!-- Mesh Gradient Overlay -->
-  <div class="mesh-gradient"></div>
 
   <!-- Interactive Foreground -->
   <div class="foreground-shapes">
@@ -1621,17 +1615,23 @@
       <a href="#" class="logo">
         <i class="fas fa-chart-line"></i>Mwaniki Digital
       </a>
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#case-studies">Case Studies</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#clients">Clients</a>
+          <a href="#case-studies">Case Studies</a>
+          <a href="#process">Process</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -1696,7 +1696,7 @@
     </p>
 
     <div class="services-container">
-      <div class="service-card glass-card">
+      <div class="service-card">
         <div class="service-icon">
           <i class="fas fa-bullhorn"></i>
         </div>
@@ -1714,7 +1714,7 @@
         <a href="#contact" class="btn btn-primary">Inquire Now</a>
       </div>
 
-      <div class="service-card glass-card">
+      <div class="service-card">
         <div class="service-icon">
           <i class="fas fa-palette"></i>
         </div>
@@ -1731,7 +1731,7 @@
         <a href="#contact" class="btn btn-primary">Inquire Now</a>
       </div>
 
-      <div class="service-card glass-card">
+      <div class="service-card">
         <div class="service-icon">
           <i class="fas fa-chart-bar"></i>
         </div>
@@ -1759,7 +1759,7 @@
     </p>
 
     <div class="clients-container">
-      <div class="client-card glass-card">
+      <div class="client-card">
         <div class="client-logo">
           <i class="fas fa-mug-hot"></i>
         </div>
@@ -1779,7 +1779,7 @@
         </div>
       </div>
 
-      <div class="client-card glass-card">
+      <div class="client-card">
         <div class="client-logo">
           <i class="fas fa-home"></i>
         </div>
@@ -1799,7 +1799,7 @@
         </div>
       </div>
 
-      <div class="client-card glass-card">
+      <div class="client-card">
         <div class="client-logo">
           <i class="fas fa-tree"></i>
         </div>
@@ -1828,7 +1828,7 @@
       Real results for real businesses. See how I've helped clients achieve measurable growth.
     </p>
 
-    <div class="case-study-container glass-card">
+    <div class="case-study-container">
       <div class="case-study-header">
         <h3 class="case-study-title">Coffee Garden Suites: Social Media Transformation</h3>
         <div class="case-study-date">November 4th – Present</div>
@@ -1860,13 +1860,13 @@
         </div>
       </div>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
         Coffee Garden Suites had inconsistent social media presence with low engagement and limited reach. They needed
         to increase visibility among potential guests and drive direct bookings through their digital channels.
       </p>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
       <div class="recommendations-grid">
         <div class="recommendation-card">
           <h4><i class="fas fa-rocket"></i> Content Strategy Overhaul</h4>
@@ -1900,7 +1900,7 @@
     </p>
 
     <div class="process-container">
-      <div class="process-step glass-card">
+      <div class="process-step">
         <div class="step-number">1</div>
         <div class="step-content">
           <h3>Discovery & Strategy</h3>
@@ -1909,7 +1909,7 @@
         </div>
       </div>
 
-      <div class="process-step glass-card">
+      <div class="process-step">
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Creation & Implementation</h3>
@@ -1918,7 +1918,7 @@
         </div>
       </div>
 
-      <div class="process-step glass-card">
+      <div class="process-step">
         <div class="step-number">3</div>
         <div class="step-content">
           <h3>Analysis & Reporting</h3>
@@ -1927,7 +1927,7 @@
         </div>
       </div>
 
-      <div class="process-step glass-card">
+      <div class="process-step">
         <div class="step-number">4</div>
         <div class="step-content">
           <h3>Optimization & Scaling</h3>
@@ -1946,7 +1946,7 @@
     </p>
 
     <div class="testimonials-container">
-      <div class="testimonial-card glass-card">
+      <div class="testimonial-card">
         <div class="testimonial-text">
           "Jackson transformed our social media presence completely. In just two months, our engagement increased by
           over 700% and we're seeing more direct bookings through our Instagram. His data-driven approach makes all the
@@ -1961,7 +1961,7 @@
         </div>
       </div>
 
-      <div class="testimonial-card glass-card">
+      <div class="testimonial-card">
         <div class="testimonial-text">
           "The strategic approach to our social media has brought measurable results. Jackson doesn't just post
           content—he analyzes performance and adjusts strategy to maximize impact. Our visibility has increased
@@ -1981,7 +1981,7 @@
   <!-- About Section -->
   <section id="about" class="section">
     <h2 class="section-title">About My Approach</h2>
-    <div class="about-content glass-card">
+    <div class="about-content">
       <div class="about-text">
         <p>
           I'm Munene, Jackson Mwaniki. I bridge the gap between creative marketing and data analytics to deliver
@@ -2019,10 +2019,10 @@
       compelling design.
     </p>
     <div class="cta-buttons">
-      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary-light);">
+      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary);">
         <i class="fas fa-paper-plane"></i> Start a Project
       </a>
-      <a href="#services" class="btn btn-outline" style="border-color: var(--primary-light); color: var(--primary-light);">
+      <a href="#services" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);">
         <i class="fas fa-list"></i> View Services
       </a>
     </div>
@@ -2033,7 +2033,7 @@
     <h2 class="section-title">Start Your Project</h2>
     <div class="contact-container">
       <div class="contact-info">
-        <div class="contact-card glass-card">
+        <div class="contact-card">
           <div class="contact-icon">
             <i class="fas fa-envelope"></i>
           </div>
@@ -2042,7 +2042,7 @@
             <a href="mailto:jacmwaniki@gmail.com">jacmwaniki@gmail.com</a>
           </div>
         </div>
-        <div class="contact-card glass-card">
+        <div class="contact-card">
           <div class="contact-icon">
             <i class="fas fa-phone"></i>
           </div>
@@ -2051,7 +2051,7 @@
             <a href="tel:+254742881370">+254 742 881 370</a>
           </div>
         </div>
-        <div class="contact-card glass-card">
+        <div class="contact-card">
           <div class="contact-icon">
             <i class="fab fa-linkedin-in"></i>
           </div>
@@ -2060,7 +2060,7 @@
             <a href="https://www.linkedin.com/in/jackson-mwaniki" target="_blank">linkedin.com/in/jackson-mwaniki</a>
           </div>
         </div>
-        <div class="contact-card glass-card">
+        <div class="contact-card">
           <div class="contact-icon">
             <i class="fas fa-clock"></i>
           </div>
@@ -2071,7 +2071,7 @@
           </div>
         </div>
       </div>
-      <div class="container glass-card">
+      <div class="container">
         <div class="form-header">
           <h1>Get Your Free Strategy Session</h1>
           <p class="form-subtitle">Tell me about your business goals</p>
@@ -2159,36 +2159,66 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+
+      // Check for saved theme preference or prefer-color-scheme
+      function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) return savedTheme;
+        
+        // Check for system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
+
+      // Set initial theme
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          themeIcon.className = 'fas fa-sun';
+          themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+          themeIcon.className = 'fas fa-moon';
+          themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      // Initialize theme
+      const currentTheme = getPreferredTheme();
+      setTheme(currentTheme);
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        setTheme(isDark ? 'light' : 'dark');
+        
+        // Add a subtle animation effect
+        themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+        setTimeout(() => {
+          themeToggle.style.transform = '';
+        }, 300);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only auto-switch if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      // Existing functionality
       const contactForm = document.getElementById("contactForm");
       const successMessage = document.getElementById("successMessage");
       const errorMessage = document.getElementById("errorMessage");
       const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
       const navLinks = document.querySelector(".nav-links");
-      const themeToggle = document.getElementById("themeToggle");
-      const themeIcon = themeToggle.querySelector("i");
-      
-      // Theme toggle functionality
-      themeToggle.addEventListener("click", function() {
-        document.body.classList.toggle("light-mode");
-        
-        if (document.body.classList.contains("light-mode")) {
-          themeIcon.classList.remove("fa-moon");
-          themeIcon.classList.add("fa-sun");
-          localStorage.setItem("theme", "light");
-        } else {
-          themeIcon.classList.remove("fa-sun");
-          themeIcon.classList.add("fa-moon");
-          localStorage.setItem("theme", "dark");
-        }
-      });
-      
-      // Check for saved theme preference
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme === "light") {
-        document.body.classList.add("light-mode");
-        themeIcon.classList.remove("fa-moon");
-        themeIcon.classList.add("fa-sun");
-      }
       
       // Interactive parallax effect for foreground elements
       const floatingElements = document.querySelectorAll('.floating-element');

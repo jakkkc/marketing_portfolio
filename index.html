@@ -14,26 +14,53 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      /* Dark mode color palette */
+      /* Color palette (shared) */
       --primary: #0ea5e9;
       --primary-dark: #0284c7;
       --primary-light: #7dd3fc;
       --accent: #f472b6;
       --accent-light: #f9a8d4;
+      --white: #ffffff;
+      
+      /* Light mode specific */
+      --bg-color: #f8fafc;
+      --surface-color: #ffffff;
+      --card-color: #ffffff;
+      --text-color: #1e293b;
+      --text-secondary: #475569;
+      --light-gray: #e2e8f0;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      --gradient-dark: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      
+      /* Dark mode color values (not used directly in light mode) */
       --dark-bg: #0f172a;
       --dark-surface: #1e293b;
       --dark-card: #334155;
       --dark-text: #f1f5f9;
       --dark-text-secondary: #cbd5e1;
+      
+      /* Animation */
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+
+    /* Dark mode overrides */
+    .dark-mode {
+      --bg-color: var(--dark-bg);
+      --surface-color: var(--dark-surface);
+      --card-color: var(--dark-card);
+      --text-color: var(--dark-text);
+      --text-secondary: var(--dark-text-secondary);
       --light-gray: #475569;
-      --white: #ffffff;
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.3);
       --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.1);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
       --glass-bg: rgba(30, 41, 59, 0.7);
       --glass-border: rgba(255, 255, 255, 0.08);
-      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       --gradient-dark: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-card) 100%);
     }
 
@@ -45,12 +72,13 @@
     }
 
     body {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
+      background-color: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Dynamic Background Animation */
@@ -68,8 +96,12 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(40px);
-      opacity: 0.3;
+      opacity: 0.1;
       animation: float 20s infinite linear;
+    }
+
+    .dark-mode .shape {
+      opacity: 0.3;
     }
 
     .shape-1 {
@@ -141,12 +173,17 @@
       position: absolute;
       border-radius: 20px;
       backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: var(--shadow-light);
       transition: transform 0.1s linear;
       pointer-events: none;
       z-index: -1;
+    }
+
+    .dark-mode .floating-element {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .floating-1 {
@@ -207,18 +244,24 @@
     h6 {
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      color: var(--dark-text);
+      color: var(--text-color);
     }
 
     /* Navigation */
     .navbar {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(248, 250, 252, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.8);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -251,10 +294,11 @@
     .nav-links {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
       transition: var(--transition);
@@ -263,7 +307,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary-light);
+      color: var(--primary);
     }
 
     .nav-links a::after {
@@ -281,13 +325,48 @@
       width: 100%;
     }
 
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      transition: var(--transition);
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(14, 165, 233, 0.2);
+      transform: rotate(30deg) scale(1.1);
+    }
+
+    .dark-mode .theme-toggle {
+      color: var(--primary-light);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+    }
+
     .mobile-menu-btn {
       display: none;
       background: none;
       border: none;
       font-size: 1.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .dark-mode .mobile-menu-btn {
+      color: var(--primary-light);
     }
 
     /* Hero Section */
@@ -325,14 +404,14 @@
       font-weight: 800;
       margin-bottom: 1.5rem;
       line-height: 1.2;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-subtitle {
       font-size: 1.35rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       margin-bottom: 2.5rem;
       max-width: 600px;
     }
@@ -387,8 +466,12 @@
 
     .btn-outline {
       border: 2px solid var(--primary);
-      color: var(--primary-light);
+      color: var(--primary);
       background: transparent;
+    }
+
+    .dark-mode .btn-outline {
+      color: var(--primary-light);
     }
 
     .btn-outline:hover {
@@ -410,9 +493,9 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: var(--shadow-hover);
-      border: 5px solid rgba(255, 255, 255, 0.1);
+      border: 5px solid var(--glass-border);
       transition: var(--transition);
-      background: var(--dark-surface);
+      background: var(--surface-color);
     }
 
     .hero-image:hover .profile-pic {
@@ -457,12 +540,15 @@
     }
 
     .service-card {
-      composes: glass-card;
       padding: 2.5rem;
       text-align: center;
       display: flex;
       flex-direction: column;
       border-top: 4px solid var(--accent);
+    }
+
+    .service-card {
+      composes: glass-card;
     }
 
     .service-card:hover {
@@ -473,20 +559,28 @@
 
     .service-icon {
       font-size: 3rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .service-card h3 {
+    .dark-mode .service-icon {
       color: var(--primary-light);
+    }
+
+    .service-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .service-card h3 {
+      color: var(--primary-light);
     }
 
     .service-card p {
       flex-grow: 1;
       margin-bottom: 2rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .service-price {
@@ -507,7 +601,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .service-features li i {
@@ -524,10 +618,13 @@
     }
 
     .client-card {
-      composes: glass-card;
       padding: 2.5rem;
       text-align: center;
       border-top: 4px solid var(--accent);
+    }
+
+    .client-card {
+      composes: glass-card;
     }
 
     .client-card:hover {
@@ -537,14 +634,26 @@
 
     .client-logo {
       font-size: 2.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .client-card h3 {
+    .dark-mode .client-logo {
       color: var(--primary-light);
+    }
+
+    .client-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .client-card h3 {
+      color: var(--primary-light);
+    }
+
+    .client-card p {
+      color: var(--text-secondary);
     }
 
     .social-platforms {
@@ -586,9 +695,12 @@
 
     /* Case Study Section */
     .case-study-container {
-      composes: glass-card;
       padding: 3rem;
       margin-top: 2rem;
+    }
+
+    .case-study-container {
+      composes: glass-card;
     }
 
     .case-study-container:hover {
@@ -602,12 +714,16 @@
       align-items: center;
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 2px solid var(--glass-border);
     }
 
     .case-study-title {
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 1.8rem;
+    }
+
+    .dark-mode .case-study-title {
+      color: var(--primary-light);
     }
 
     .case-study-date {
@@ -626,12 +742,16 @@
     }
 
     .highlight-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       text-align: center;
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+    }
+
+    .dark-mode .highlight-card {
+      background: rgba(30, 41, 59, 0.5);
     }
 
     .highlight-card:hover {
@@ -647,8 +767,12 @@
     }
 
     .highlight-label {
-      color: var(--primary-light);
+      color: var(--primary);
       font-weight: 600;
+    }
+
+    .dark-mode .highlight-label {
+      color: var(--primary-light);
     }
 
     .recommendations-grid {
@@ -659,28 +783,39 @@
     }
 
     .recommendation-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       border-left: 4px solid var(--primary);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+    }
+
+    .dark-mode .recommendation-card {
+      background: rgba(30, 41, 59, 0.5);
     }
 
     .recommendation-card h4 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
+    .dark-mode .recommendation-card h4 {
+      color: var(--primary-light);
+    }
+
     /* About Section */
     .about-content {
-      composes: glass-card;
       display: flex;
       gap: 4rem;
       align-items: center;
       padding: 3rem;
+    }
+
+    .about-content {
+      composes: glass-card;
     }
 
     .about-content:hover {
@@ -696,7 +831,7 @@
       margin-bottom: 1.5rem;
       font-size: 1.1rem;
       line-height: 1.8;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .about-image {
@@ -710,7 +845,7 @@
       border-radius: 15px;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
     }
 
     .about-image img:hover {
@@ -730,8 +865,11 @@
       display: flex;
       align-items: flex-start;
       gap: 2rem;
-      composes: glass-card;
       padding: 2.5rem;
+    }
+
+    .process-step {
+      composes: glass-card;
     }
 
     .process-step:hover {
@@ -754,13 +892,17 @@
     }
 
     .step-content h3 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1rem;
       font-size: 1.5rem;
     }
 
+    .dark-mode .step-content h3 {
+      color: var(--primary-light);
+    }
+
     .step-content p {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       line-height: 1.7;
     }
 
@@ -773,9 +915,12 @@
     }
 
     .testimonial-card {
-      composes: glass-card;
       padding: 2.5rem;
       position: relative;
+    }
+
+    .testimonial-card {
+      composes: glass-card;
     }
 
     .testimonial-card:hover {
@@ -797,7 +942,7 @@
     .testimonial-text {
       font-style: italic;
       margin-bottom: 1.5rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       line-height: 1.7;
     }
 
@@ -821,12 +966,16 @@
     }
 
     .author-info h4 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 0.25rem;
     }
 
+    .dark-mode .author-info h4 {
+      color: var(--primary-light);
+    }
+
     .author-info p {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
@@ -838,11 +987,14 @@
     }
 
     .project-card {
-      composes: glass-card;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       height: 100%;
+    }
+
+    .project-card {
+      composes: glass-card;
     }
 
     .project-card:hover {
@@ -871,11 +1023,15 @@
     .project-title {
       font-size: 1.4rem;
       margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .project-title {
       color: var(--primary-light);
     }
 
     .project-description {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       margin-bottom: 1.5rem;
       flex-grow: 1;
       font-size: 1.05rem;
@@ -891,12 +1047,16 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
       transition: var(--transition);
       padding: 0.5rem 0;
+    }
+
+    .dark-mode .project-link {
+      color: var(--primary-light);
     }
 
     .project-link:hover {
@@ -920,9 +1080,12 @@
       display: flex;
       align-items: center;
       gap: 1.5rem;
-      composes: glass-card;
       padding: 1.8rem;
       border-left: 4px solid var(--accent);
+    }
+
+    .contact-card {
+      composes: glass-card;
     }
 
     .contact-card:hover {
@@ -944,12 +1107,16 @@
 
     .contact-details h3 {
       margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .contact-details h3 {
       color: var(--primary-light);
     }
 
     .contact-details p,
     .contact-details a {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       text-decoration: none;
       transition: var(--transition);
       font-size: 1.05rem;
@@ -962,9 +1129,12 @@
     /* Form styles */
     .container {
       width: 100%;
-      composes: glass-card;
       overflow: hidden;
       border-left: 4px solid var(--primary);
+    }
+
+    .container {
+      composes: glass-card;
     }
 
     .container:hover {
@@ -1006,8 +1176,12 @@
       display: block;
       margin-bottom: 0.6rem;
       font-weight: 600;
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 0.95rem;
+    }
+
+    .dark-mode label {
+      color: var(--primary-light);
     }
 
     input[type="text"],
@@ -1016,12 +1190,19 @@
     textarea {
       width: 100%;
       padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
       border-radius: 10px;
       font-size: 1rem;
       transition: var(--transition);
+      background-color: rgba(255, 255, 255, 0.5);
+      color: var(--text-color);
+    }
+
+    .dark-mode input[type="text"],
+    .dark-mode input[type="email"],
+    .dark-mode select,
+    .dark-mode textarea {
       background-color: rgba(30, 41, 59, 0.5);
-      color: var(--dark-text);
     }
 
     input[type="text"]:focus,
@@ -1031,6 +1212,12 @@
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+    }
+
+    .dark-mode input[type="text"]:focus,
+    .dark-mode input[type="email"]:focus,
+    .dark-mode select:focus,
+    .dark-mode textarea:focus {
       background-color: rgba(30, 41, 59, 0.8);
     }
 
@@ -1099,17 +1286,17 @@
     .form-footer {
       text-align: center;
       margin-top: 1.8rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
     /* Footer */
     .footer {
-      background: var(--dark-surface);
-      color: var(--white);
+      background: var(--surface-color);
+      color: var(--text-color);
       padding: 3rem 2rem;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--glass-border);
     }
 
     .social-links {
@@ -1120,7 +1307,7 @@
     }
 
     .social-link {
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 1.8rem;
       transition: var(--transition);
       background: rgba(14, 165, 233, 0.1);
@@ -1133,6 +1320,10 @@
       text-decoration: none;
     }
 
+    .dark-mode .social-link {
+      color: var(--primary-light);
+    }
+
     .social-link:hover {
       color: var(--accent);
       transform: translateY(-5px);
@@ -1140,7 +1331,7 @@
     }
 
     .copyright {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.95rem;
       margin-top: 1.5rem;
     }
@@ -1166,13 +1357,13 @@
     .stats {
       background: var(--gradient-dark);
       padding: 4rem 2rem;
-      color: var(--white);
+      color: var(--text-color);
       text-align: center;
       margin: 4rem auto;
       border-radius: 20px;
       box-shadow: var(--shadow);
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
     .stats-container {
@@ -1205,19 +1396,19 @@
     /* CTA Section */
     .cta-section {
       background: var(--gradient-dark);
-      color: white;
+      color: var(--text-color);
       text-align: center;
       padding: 5rem 2rem;
       border-radius: 20px;
       margin: 4rem auto;
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
     .cta-title {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1229,7 +1420,7 @@
       margin-left: auto;
       margin-right: auto;
       opacity: 0.9;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .cta-buttons {
@@ -1284,11 +1475,17 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(248, 250, 252, 0.95);
         backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 999;
+      }
+
+      .dark-mode .nav-links {
+        background: rgba(15, 23, 42, 0.95);
         border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
 
@@ -1298,6 +1495,10 @@
 
       .mobile-menu-btn {
         display: block;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
       }
 
       .hero-title {
@@ -1414,17 +1615,23 @@
       <a href="#" class="logo">
         <i class="fas fa-chart-line"></i>Mwaniki Digital
       </a>
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#case-studies">Case Studies</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#clients">Clients</a>
+          <a href="#case-studies">Case Studies</a>
+          <a href="#process">Process</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -1483,7 +1690,7 @@
   <!-- Services Section -->
   <section id="services" class="section">
     <h2 class="section-title">My Services</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       Tailored solutions designed to deliver measurable business results. Each package includes detailed analytics and
       performance reporting.
     </p>
@@ -1546,7 +1753,7 @@
   <!-- Client Showcase Section - UPDATED WITH SOCIAL LINKS -->
   <section id="clients" class="section">
     <h2 class="section-title">Client Portfolio</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       I manage comprehensive social media strategies across multiple platforms for these businesses, driving engagement,
       visibility, and conversions.
     </p>
@@ -1617,7 +1824,7 @@
   <!-- Case Study Section -->
   <section id="case-studies" class="section">
     <h2 class="section-title">Case Studies</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       Real results for real businesses. See how I've helped clients achieve measurable growth.
     </p>
 
@@ -1631,35 +1838,35 @@
         <div class="highlight-card">
           <div class="highlight-value">100%</div>
           <div class="highlight-label">Increase in Interactions</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Facebook engagement growth</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Facebook engagement growth</p>
         </div>
 
         <div class="highlight-card">
           <div class="highlight-value">308.3%</div>
           <div class="highlight-label">Increase in Viewers</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Facebook reach expansion</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Facebook reach expansion</p>
         </div>
 
         <div class="highlight-card">
           <div class="highlight-value">2,218</div>
           <div class="highlight-label">Total Views</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Instagram content performance</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Instagram content performance</p>
         </div>
 
         <div class="highlight-card">
           <div class="highlight-value">59.3%</div>
           <div class="highlight-label">Non-Follower Reach</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">New audience attraction</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">New audience attraction</p>
         </div>
       </div>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
-      <p style="color: var(--dark-text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
         Coffee Garden Suites had inconsistent social media presence with low engagement and limited reach. They needed
         to increase visibility among potential guests and drive direct bookings through their digital channels.
       </p>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
       <div class="recommendations-grid">
         <div class="recommendation-card">
           <h4><i class="fas fa-rocket"></i> Content Strategy Overhaul</h4>
@@ -1688,7 +1895,7 @@
   <!-- Process Section -->
   <section id="process" class="section">
     <h2 class="section-title">My 4-Step Process</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       A structured approach to ensure your social media and design projects deliver maximum impact.
     </p>
 
@@ -1734,7 +1941,7 @@
   <!-- Testimonials Section -->
   <section id="testimonials" class="section">
     <h2 class="section-title">Client Testimonials</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       Don't just take my word for it. Here's what my clients have to say.
     </p>
 
@@ -1812,10 +2019,10 @@
       compelling design.
     </p>
     <div class="cta-buttons">
-      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary-light);">
+      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary);">
         <i class="fas fa-paper-plane"></i> Start a Project
       </a>
-      <a href="#services" class="btn btn-outline" style="border-color: var(--primary-light); color: var(--primary-light);">
+      <a href="#services" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);">
         <i class="fas fa-list"></i> View Services
       </a>
     </div>
@@ -1860,7 +2067,7 @@
           <div class="contact-details">
             <h3>Response Time</h3>
             <p>Typically within 24 hours</p>
-            <p style="font-size: 0.9rem; color: var(--dark-text-secondary);">Monday - Friday, 9AM - 6PM EAT</p>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Monday - Friday, 9AM - 6PM EAT</p>
           </div>
         </div>
       </div>
@@ -1952,6 +2159,61 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+
+      // Check for saved theme preference or prefer-color-scheme
+      function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) return savedTheme;
+        
+        // Check for system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
+
+      // Set initial theme
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          themeIcon.className = 'fas fa-sun';
+          themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+          themeIcon.className = 'fas fa-moon';
+          themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      // Initialize theme
+      const currentTheme = getPreferredTheme();
+      setTheme(currentTheme);
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        setTheme(isDark ? 'light' : 'dark');
+        
+        // Add a subtle animation effect
+        themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+        setTimeout(() => {
+          themeToggle.style.transform = '';
+        }, 300);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only auto-switch if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      // Existing functionality
       const contactForm = document.getElementById("contactForm");
       const successMessage = document.getElementById("successMessage");
       const errorMessage = document.getElementById("errorMessage");
