@@ -4,13 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mwaniki Digital | Social Media & Design Agency Driving Business Growth</title>
+  <title>NexInk Ltd | Social Media & Design Agency Driving Business Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Modern font stack -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+  <!-- Updated fonts to Montserrat and Glacial Indifference -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/glacial-indifference" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -68,7 +67,18 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Glacial Indifference', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Glacial Indifference', sans-serif;
+      font-weight: 700;
+      color: var(--text-color);
     }
 
     body {
@@ -236,17 +246,6 @@
       -webkit-backdrop-filter: blur(15px);
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      color: var(--text-color);
-    }
-
     /* Navigation */
     .navbar {
       background: rgba(248, 250, 252, 0.8);
@@ -287,8 +286,9 @@
       gap: 0.5rem;
     }
 
-    .logo i {
-      color: var(--accent);
+    .logo img {
+      height: 40px;
+      width: auto;
     }
 
     .nav-links {
@@ -693,166 +693,6 @@
       background-color: #000000;
     }
 
-    /* Case Study Section */
-    .case-study-container {
-      padding: 3rem;
-      margin-top: 2rem;
-    }
-
-    .case-study-container {
-      composes: glass-card;
-    }
-
-    .case-study-container:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .case-study-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 2px solid var(--glass-border);
-    }
-
-    .case-study-title {
-      color: var(--primary);
-      font-size: 1.8rem;
-    }
-
-    .dark-mode .case-study-title {
-      color: var(--primary-light);
-    }
-
-    .case-study-date {
-      color: var(--accent);
-      font-weight: 600;
-      background: rgba(244, 114, 182, 0.1);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-    }
-
-    .case-study-highlights {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .highlight-card {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 10px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: var(--transition);
-      border: 1px solid var(--glass-border);
-    }
-
-    .dark-mode .highlight-card {
-      background: rgba(30, 41, 59, 0.5);
-    }
-
-    .highlight-card:hover {
-      background: rgba(14, 165, 233, 0.1);
-      transform: translateY(-5px);
-    }
-
-    .highlight-value {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .highlight-label {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .dark-mode .highlight-label {
-      color: var(--primary-light);
-    }
-
-    .recommendations-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .recommendation-card {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 10px;
-      padding: 1.5rem;
-      border-left: 4px solid var(--primary);
-      border: 1px solid var(--glass-border);
-    }
-
-    .dark-mode .recommendation-card {
-      background: rgba(30, 41, 59, 0.5);
-    }
-
-    .recommendation-card h4 {
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .dark-mode .recommendation-card h4 {
-      color: var(--primary-light);
-    }
-
-    /* About Section */
-    .about-content {
-      display: flex;
-      gap: 4rem;
-      align-items: center;
-      padding: 3rem;
-    }
-
-    .about-content {
-      composes: glass-card;
-    }
-
-    .about-content:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .about-text {
-      flex: 2;
-    }
-
-    .about-text p {
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--text-secondary);
-    }
-
-    .about-image {
-      flex: 1;
-      text-align: center;
-    }
-
-    .about-image img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-      border: 1px solid var(--glass-border);
-    }
-
-    .about-image img:hover {
-      transform: scale(1.03);
-      border-color: rgba(14, 165, 233, 0.3);
-    }
-
     /* Process Section */
     .process-container {
       display: flex;
@@ -979,88 +819,51 @@
       font-size: 0.9rem;
     }
 
-    /* Projects Section */
-    .projects-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .project-card {
-      overflow: hidden;
+    /* About Section */
+    .about-content {
       display: flex;
-      flex-direction: column;
-      height: 100%;
+      gap: 4rem;
+      align-items: center;
+      padding: 3rem;
     }
 
-    .project-card {
+    .about-content {
       composes: glass-card;
     }
 
-    .project-card:hover {
+    .about-content:hover {
       transform: translateY(-10px);
       box-shadow: var(--shadow-hover);
     }
 
-    .project-image {
-      height: 220px;
-      width: 100%;
-      object-fit: cover;
-      transition: var(--transition);
+    .about-text {
+      flex: 2;
     }
 
-    .project-card:hover .project-image {
-      transform: scale(1.05);
-    }
-
-    .project-content {
-      padding: 1.8rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .project-title {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-      color: var(--primary);
-    }
-
-    .dark-mode .project-title {
-      color: var(--primary-light);
-    }
-
-    .project-description {
-      color: var(--text-secondary);
+    .about-text p {
       margin-bottom: 1.5rem;
-      flex-grow: 1;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
     }
 
-    .project-links {
-      display: flex;
-      gap: 1.2rem;
-      margin-top: auto;
+    .about-image {
+      flex: 1;
+      text-align: center;
     }
 
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
+    .about-image img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
       transition: var(--transition);
-      padding: 0.5rem 0;
+      border: 1px solid var(--glass-border);
     }
 
-    .dark-mode .project-link {
-      color: var(--primary-light);
-    }
-
-    .project-link:hover {
-      color: var(--accent);
+    .about-image img:hover {
+      transform: scale(1.03);
+      border-color: rgba(14, 165, 233, 0.3);
     }
 
     /* Contact Section */
@@ -1429,6 +1232,111 @@
       justify-content: center;
     }
 
+    /* Growth Methodology Section (replaces Case Studies) */
+    .methodology-container {
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+
+    .methodology-container {
+      composes: glass-card;
+    }
+
+    .methodology-container:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .methodology-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--glass-border);
+    }
+
+    .methodology-title {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+
+    .dark-mode .methodology-title {
+      color: var(--primary-light);
+    }
+
+    .methodology-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid var(--glass-border);
+    }
+
+    .dark-mode .highlight-card {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    .highlight-card:hover {
+      background: rgba(14, 165, 233, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .highlight-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-label {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .dark-mode .highlight-label {
+      color: var(--primary-light);
+    }
+
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .methodology-card {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border-left: 4px solid var(--primary);
+      border: 1px solid var(--glass-border);
+    }
+
+    .dark-mode .methodology-card {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    .methodology-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dark-mode .methodology-card h4 {
+      color: var(--primary-light);
+    }
+
     /* Responsive adjustments */
     @media (max-width: 1100px) {
       .hero-title {
@@ -1461,7 +1369,7 @@
         flex-direction: column;
       }
 
-      .case-study-header {
+      .methodology-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
@@ -1531,7 +1439,7 @@
       }
 
       .client-card,
-      .case-study-container {
+      .methodology-container {
         padding: 2rem;
       }
 
@@ -1570,19 +1478,18 @@
       }
 
       .about-content,
-      .case-study-container {
+      .methodology-container {
         padding: 2rem;
       }
 
-      .projects-container,
       .clients-container,
       .services-container,
       .testimonials-container {
         grid-template-columns: 1fr;
       }
 
-      .case-study-highlights,
-      .recommendations-grid {
+      .methodology-highlights,
+      .methodology-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1613,13 +1520,13 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="logo">
-        <i class="fas fa-chart-line"></i>Mwaniki Digital
+        <img src="img/logo.png" alt="NexInk Ltd Logo">NexInk Ltd
       </a>
       <div style="display: flex; align-items: center; gap: 1rem;">
         <div class="nav-links">
           <a href="#services">Services</a>
           <a href="#clients">Clients</a>
-          <a href="#case-studies">Case Studies</a>
+          <a href="#methodology">Methodology</a>
           <a href="#process">Process</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#about">About</a>
@@ -1654,8 +1561,8 @@
         <a href="#contact" class="btn btn-primary">
           <i class="fas fa-calendar-check"></i> Book a Strategy Call
         </a>
-        <a href="#case-studies" class="btn btn-outline">
-          <i class="fas fa-chart-line"></i> View Case Studies
+        <a href="#methodology" class="btn btn-outline">
+          <i class="fas fa-chart-line"></i> View Methodology
         </a>
       </div>
     </div>
@@ -1821,72 +1728,70 @@
     </div>
   </section>
 
-  <!-- Case Study Section -->
-  <section id="case-studies" class="section">
-    <h2 class="section-title">Case Studies</h2>
+  <!-- Growth Methodology Section (Replaces Case Studies) -->
+  <section id="methodology" class="section">
+    <h2 class="section-title">My Growth Methodology</h2>
     <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
-      Real results for real businesses. See how I've helped clients achieve measurable growth.
+      I grow every business through strategic graphics and online channel management. My approach combines creative design with data-driven marketing to deliver measurable results.
     </p>
 
-    <div class="case-study-container">
-      <div class="case-study-header">
-        <h3 class="case-study-title">Coffee Garden Suites: Social Media Transformation</h3>
-        <div class="case-study-date">November 4th – Present</div>
+    <div class="methodology-container">
+      <div class="methodology-header">
+        <h3 class="methodology-title">How I Drive Business Growth</h3>
+        <div class="case-study-date">Proven Approach</div>
       </div>
 
-      <div class="case-study-highlights">
+      <div class="methodology-highlights">
         <div class="highlight-card">
-          <div class="highlight-value">100%</div>
-          <div class="highlight-label">Increase in Interactions</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Facebook engagement growth</p>
+          <div class="highlight-value">Visual</div>
+          <div class="highlight-label">Graphics That Convert</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Compelling designs that capture attention and communicate value</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">308.3%</div>
-          <div class="highlight-label">Increase in Viewers</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Facebook reach expansion</p>
+          <div class="highlight-value">Strategic</div>
+          <div class="highlight-label">Online Channel Optimization</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Multi-platform strategies tailored to your audience</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">2,218</div>
-          <div class="highlight-label">Total Views</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Instagram content performance</p>
+          <div class="highlight-value">Data-Driven</div>
+          <div class="highlight-label">Performance Analytics</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Continuous optimization based on real-time data</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">59.3%</div>
-          <div class="highlight-label">Non-Follower Reach</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">New audience attraction</p>
+          <div class="highlight-value">Results</div>
+          <div class="highlight-label">Measurable Growth</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Tangible business outcomes and ROI</p>
         </div>
       </div>
 
-      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">My Growth Framework:</h4>
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
-        Coffee Garden Suites had inconsistent social media presence with low engagement and limited reach. They needed
-        to increase visibility among potential guests and drive direct bookings through their digital channels.
+        Every business I work with benefits from a customized approach that combines creative excellence with strategic marketing. I don't just create graphics or manage social media—I build comprehensive growth systems that drive revenue and brand authority.
       </p>
 
-      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
-      <div class="recommendations-grid">
-        <div class="recommendation-card">
-          <h4><i class="fas fa-rocket"></i> Content Strategy Overhaul</h4>
-          <p>Developed a content calendar focused on showcasing facilities, guest experiences, and local attractions.
-          </p>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Key Growth Components:</h4>
+      <div class="methodology-grid">
+        <div class="methodology-card">
+          <h4><i class="fas fa-paint-brush"></i> Strategic Visual Design</h4>
+          <p>Creating graphics that don't just look good—they drive action. Every design element is crafted with conversion psychology in mind.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-video"></i> Platform Optimization</h4>
-          <p>Converted TikTok to Business Account for analytics and implemented Instagram Reels strategy.</p>
+        <div class="methodology-card">
+          <h4><i class="fas fa-bullseye"></i> Targeted Online Presence</h4>
+          <p>Building and optimizing your presence across the right channels where your ideal customers spend their time.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-film"></i> Visual Content Creation</h4>
-          <p>Produced professional photos and videos highlighting accommodations and amenities.</p>
+        <div class="methodology-card">
+          <h4><i class="fas fa-chart-line"></i> Conversion Optimization</h4>
+          <p>Analyzing user behavior and engagement data to continually improve performance and maximize ROI.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-users"></i> Community Building</h4>
-          <p>Implemented engagement strategies and user-generated content campaigns.</p>
+        <div class="methodology-card">
+          <h4><i class="fas fa-sync-alt"></i> Continuous Improvement</h4>
+          <p>Regular strategy reviews and optimizations based on performance data and market trends.</p>
         </div>
       </div>
     </div>
@@ -2139,7 +2044,11 @@
   </section>
 
   <!-- Footer -->
+    <!-- Footer -->
   <footer class="footer">
+    <div class="footer-logo" style="margin-bottom: 2rem;">
+      <img src="img/logo.png" alt="NexInk Ltd Logo" style="height: 50px; width: auto;">
+    </div>
     <div class="social-links">
       <a href="https://www.linkedin.com/in/jackson-mwaniki" class="social-link" target="_blank">
         <i class="fab fa-linkedin-in"></i>
@@ -2154,7 +2063,7 @@
         <i class="fas fa-phone"></i>
       </a>
     </div>
-    <p class="copyright">© 2025 Mwaniki Digital. All rights reserved. | Designed to drive business growth.</p>
+    <p class="copyright">© 2025 NexInk Ltd. All rights reserved. | Designed to drive business growth.</p>
   </footer>
 
   <script>

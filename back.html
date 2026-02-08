@@ -4,36 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mwaniki Digital | Social Media & Design Agency Driving Business Growth</title>
+  <title>NexInk Ltd. | Social Media & Design Agency Driving Business Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Modern font stack -->
+  <!-- Updated font stack -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/glacial-indifference" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      /* Dark mode color palette */
+      /* Color palette (shared) */
       --primary: #0ea5e9;
       --primary-dark: #0284c7;
       --primary-light: #7dd3fc;
       --accent: #f472b6;
       --accent-light: #f9a8d4;
+      --white: #ffffff;
+      
+      /* Light mode specific */
+      --bg-color: #f8fafc;
+      --surface-color: #ffffff;
+      --card-color: #ffffff;
+      --text-color: #1e293b;
+      --text-secondary: #475569;
+      --light-gray: #e2e8f0;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      --gradient-dark: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      
+      /* Dark mode color values (not used directly in light mode) */
       --dark-bg: #0f172a;
       --dark-surface: #1e293b;
       --dark-card: #334155;
       --dark-text: #f1f5f9;
       --dark-text-secondary: #cbd5e1;
+      
+      /* Animation */
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+
+    /* Dark mode overrides */
+    .dark-mode {
+      --bg-color: var(--dark-bg);
+      --surface-color: var(--dark-surface);
+      --card-color: var(--dark-card);
+      --text-color: var(--dark-text);
+      --text-secondary: var(--dark-text-secondary);
       --light-gray: #475569;
-      --white: #ffffff;
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.3);
       --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.1);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
       --glass-bg: rgba(30, 41, 59, 0.7);
       --glass-border: rgba(255, 255, 255, 0.08);
-      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       --gradient-dark: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-card) 100%);
     }
 
@@ -41,16 +69,46 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Glacial Indifference', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
+      background-color: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: 'Glacial Indifference', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+
+    /* Logo Styles */
+    .logo-img {
+      height: 40px;
+      width: auto;
+      transition: var(--transition);
+    }
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+    .footer-logo {
+      height: 50px;
+      width: auto;
+      margin-bottom: 1.5rem;
     }
 
     /* Dynamic Background Animation */
@@ -68,8 +126,12 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(40px);
-      opacity: 0.3;
+      opacity: 0.1;
       animation: float 20s infinite linear;
+    }
+
+    .dark-mode .shape {
+      opacity: 0.3;
     }
 
     .shape-1 {
@@ -141,12 +203,17 @@
       position: absolute;
       border-radius: 20px;
       backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: var(--shadow-light);
       transition: transform 0.1s linear;
       pointer-events: none;
       z-index: -1;
+    }
+
+    .dark-mode .floating-element {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .floating-1 {
@@ -199,26 +266,21 @@
       -webkit-backdrop-filter: blur(15px);
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      color: var(--dark-text);
-    }
-
     /* Navigation */
     .navbar {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(248, 250, 252, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.8);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -251,19 +313,21 @@
     .nav-links {
       display: flex;
       gap: 2rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
       transition: var(--transition);
       position: relative;
       padding: 0.5rem 0;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .nav-links a:hover {
-      color: var(--primary-light);
+      color: var(--primary);
     }
 
     .nav-links a::after {
@@ -281,13 +345,48 @@
       width: 100%;
     }
 
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 165, 233, 0.1);
+      color: var(--primary);
+      transition: var(--transition);
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(14, 165, 233, 0.2);
+      transform: rotate(30deg) scale(1.1);
+    }
+
+    .dark-mode .theme-toggle {
+      color: var(--primary-light);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+    }
+
     .mobile-menu-btn {
       display: none;
       background: none;
       border: none;
       font-size: 1.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .dark-mode .mobile-menu-btn {
+      color: var(--primary-light);
     }
 
     /* Hero Section */
@@ -325,14 +424,14 @@
       font-weight: 800;
       margin-bottom: 1.5rem;
       line-height: 1.2;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .hero-subtitle {
       font-size: 1.35rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       margin-bottom: 2.5rem;
       max-width: 600px;
     }
@@ -373,6 +472,7 @@
       box-shadow: var(--shadow);
       border: none;
       cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .btn-primary {
@@ -387,8 +487,12 @@
 
     .btn-outline {
       border: 2px solid var(--primary);
-      color: var(--primary-light);
+      color: var(--primary);
       background: transparent;
+    }
+
+    .dark-mode .btn-outline {
+      color: var(--primary-light);
     }
 
     .btn-outline:hover {
@@ -410,9 +514,9 @@
       object-fit: cover;
       border-radius: 20px;
       box-shadow: var(--shadow-hover);
-      border: 5px solid rgba(255, 255, 255, 0.1);
+      border: 5px solid var(--glass-border);
       transition: var(--transition);
-      background: var(--dark-surface);
+      background: var(--surface-color);
     }
 
     .hero-image:hover .profile-pic {
@@ -457,12 +561,15 @@
     }
 
     .service-card {
-      composes: glass-card;
       padding: 2.5rem;
       text-align: center;
       display: flex;
       flex-direction: column;
       border-top: 4px solid var(--accent);
+    }
+
+    .service-card {
+      composes: glass-card;
     }
 
     .service-card:hover {
@@ -473,20 +580,28 @@
 
     .service-icon {
       font-size: 3rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .service-card h3 {
+    .dark-mode .service-icon {
       color: var(--primary-light);
+    }
+
+    .service-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .service-card h3 {
+      color: var(--primary-light);
     }
 
     .service-card p {
       flex-grow: 1;
       margin-bottom: 2rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .service-price {
@@ -507,7 +622,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .service-features li i {
@@ -524,10 +639,13 @@
     }
 
     .client-card {
-      composes: glass-card;
       padding: 2.5rem;
       text-align: center;
       border-top: 4px solid var(--accent);
+    }
+
+    .client-card {
+      composes: glass-card;
     }
 
     .client-card:hover {
@@ -537,14 +655,26 @@
 
     .client-logo {
       font-size: 2.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1.5rem;
     }
 
-    .client-card h3 {
+    .dark-mode .client-logo {
       color: var(--primary-light);
+    }
+
+    .client-card h3 {
+      color: var(--primary);
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+    }
+
+    .dark-mode .client-card h3 {
+      color: var(--primary-light);
+    }
+
+    .client-card p {
+      color: var(--text-secondary);
     }
 
     .social-platforms {
@@ -584,33 +714,40 @@
       background-color: #000000;
     }
 
-    /* Case Study Section */
-    .case-study-container {
-      composes: glass-card;
+    /* Brand Growth Section (Replaces Case Studies) */
+    .brand-growth-container {
       padding: 3rem;
       margin-top: 2rem;
     }
 
-    .case-study-container:hover {
+    .brand-growth-container {
+      composes: glass-card;
+    }
+
+    .brand-growth-container:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
     }
 
-    .case-study-header {
+    .brand-growth-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 2px solid var(--glass-border);
     }
 
-    .case-study-title {
-      color: var(--primary-light);
+    .brand-growth-title {
+      color: var(--primary);
       font-size: 1.8rem;
     }
 
-    .case-study-date {
+    .dark-mode .brand-growth-title {
+      color: var(--primary-light);
+    }
+
+    .brand-growth-subtitle {
       color: var(--accent);
       font-weight: 600;
       background: rgba(244, 114, 182, 0.1);
@@ -618,7 +755,7 @@
       border-radius: 50px;
     }
 
-    .case-study-highlights {
+    .growth-highlights {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
@@ -626,12 +763,16 @@
     }
 
     .highlight-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       text-align: center;
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+    }
+
+    .dark-mode .highlight-card {
+      background: rgba(30, 41, 59, 0.5);
     }
 
     .highlight-card:hover {
@@ -647,40 +788,55 @@
     }
 
     .highlight-label {
-      color: var(--primary-light);
+      color: var(--primary);
       font-weight: 600;
     }
 
-    .recommendations-grid {
+    .dark-mode .highlight-label {
+      color: var(--primary-light);
+    }
+
+    .growth-pillars {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
 
-    .recommendation-card {
-      background: rgba(30, 41, 59, 0.5);
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.5);
       border-radius: 10px;
       padding: 1.5rem;
       border-left: 4px solid var(--primary);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
-    .recommendation-card h4 {
-      color: var(--primary-light);
+    .dark-mode .pillar-card {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    .pillar-card h4 {
+      color: var(--primary);
       margin-bottom: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
+    .dark-mode .pillar-card h4 {
+      color: var(--primary-light);
+    }
+
     /* About Section */
     .about-content {
-      composes: glass-card;
       display: flex;
       gap: 4rem;
       align-items: center;
       padding: 3rem;
+    }
+
+    .about-content {
+      composes: glass-card;
     }
 
     .about-content:hover {
@@ -696,7 +852,7 @@
       margin-bottom: 1.5rem;
       font-size: 1.1rem;
       line-height: 1.8;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .about-image {
@@ -710,7 +866,7 @@
       border-radius: 15px;
       box-shadow: var(--shadow);
       transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
     }
 
     .about-image img:hover {
@@ -730,8 +886,11 @@
       display: flex;
       align-items: flex-start;
       gap: 2rem;
-      composes: glass-card;
       padding: 2.5rem;
+    }
+
+    .process-step {
+      composes: glass-card;
     }
 
     .process-step:hover {
@@ -754,13 +913,17 @@
     }
 
     .step-content h3 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 1rem;
       font-size: 1.5rem;
     }
 
+    .dark-mode .step-content h3 {
+      color: var(--primary-light);
+    }
+
     .step-content p {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       line-height: 1.7;
     }
 
@@ -773,9 +936,12 @@
     }
 
     .testimonial-card {
-      composes: glass-card;
       padding: 2.5rem;
       position: relative;
+    }
+
+    .testimonial-card {
+      composes: glass-card;
     }
 
     .testimonial-card:hover {
@@ -797,7 +963,7 @@
     .testimonial-text {
       font-style: italic;
       margin-bottom: 1.5rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       line-height: 1.7;
     }
 
@@ -821,12 +987,16 @@
     }
 
     .author-info h4 {
-      color: var(--primary-light);
+      color: var(--primary);
       margin-bottom: 0.25rem;
     }
 
+    .dark-mode .author-info h4 {
+      color: var(--primary-light);
+    }
+
     .author-info p {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
@@ -838,11 +1008,14 @@
     }
 
     .project-card {
-      composes: glass-card;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       height: 100%;
+    }
+
+    .project-card {
+      composes: glass-card;
     }
 
     .project-card:hover {
@@ -871,11 +1044,15 @@
     .project-title {
       font-size: 1.4rem;
       margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .project-title {
       color: var(--primary-light);
     }
 
     .project-description {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       margin-bottom: 1.5rem;
       flex-grow: 1;
       font-size: 1.05rem;
@@ -891,12 +1068,17 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--primary-light);
+      color: var(--primary);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
       transition: var(--transition);
       padding: 0.5rem 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .dark-mode .project-link {
+      color: var(--primary-light);
     }
 
     .project-link:hover {
@@ -920,9 +1102,12 @@
       display: flex;
       align-items: center;
       gap: 1.5rem;
-      composes: glass-card;
       padding: 1.8rem;
       border-left: 4px solid var(--accent);
+    }
+
+    .contact-card {
+      composes: glass-card;
     }
 
     .contact-card:hover {
@@ -944,12 +1129,16 @@
 
     .contact-details h3 {
       margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .dark-mode .contact-details h3 {
       color: var(--primary-light);
     }
 
     .contact-details p,
     .contact-details a {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       text-decoration: none;
       transition: var(--transition);
       font-size: 1.05rem;
@@ -962,9 +1151,12 @@
     /* Form styles */
     .container {
       width: 100%;
-      composes: glass-card;
       overflow: hidden;
       border-left: 4px solid var(--primary);
+    }
+
+    .container {
+      composes: glass-card;
     }
 
     .container:hover {
@@ -1006,8 +1198,13 @@
       display: block;
       margin-bottom: 0.6rem;
       font-weight: 600;
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 0.95rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .dark-mode label {
+      color: var(--primary-light);
     }
 
     input[type="text"],
@@ -1016,12 +1213,20 @@
     textarea {
       width: 100%;
       padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
       border-radius: 10px;
       font-size: 1rem;
       transition: var(--transition);
+      background-color: rgba(255, 255, 255, 0.5);
+      color: var(--text-color);
+      font-family: 'Glacial Indifference', sans-serif;
+    }
+
+    .dark-mode input[type="text"],
+    .dark-mode input[type="email"],
+    .dark-mode select,
+    .dark-mode textarea {
       background-color: rgba(30, 41, 59, 0.5);
-      color: var(--dark-text);
     }
 
     input[type="text"]:focus,
@@ -1031,6 +1236,12 @@
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+    }
+
+    .dark-mode input[type="text"]:focus,
+    .dark-mode input[type="email"]:focus,
+    .dark-mode select:focus,
+    .dark-mode textarea:focus {
       background-color: rgba(30, 41, 59, 0.8);
     }
 
@@ -1055,6 +1266,7 @@
       align-items: center;
       gap: 0.75rem;
       box-shadow: var(--shadow);
+      font-family: 'Montserrat', sans-serif;
     }
 
     .submit-btn:hover {
@@ -1099,17 +1311,17 @@
     .form-footer {
       text-align: center;
       margin-top: 1.8rem;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
     /* Footer */
     .footer {
-      background: var(--dark-surface);
-      color: var(--white);
+      background: var(--surface-color);
+      color: var(--text-color);
       padding: 3rem 2rem;
       text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--glass-border);
     }
 
     .social-links {
@@ -1120,7 +1332,7 @@
     }
 
     .social-link {
-      color: var(--primary-light);
+      color: var(--primary);
       font-size: 1.8rem;
       transition: var(--transition);
       background: rgba(14, 165, 233, 0.1);
@@ -1133,6 +1345,10 @@
       text-decoration: none;
     }
 
+    .dark-mode .social-link {
+      color: var(--primary-light);
+    }
+
     .social-link:hover {
       color: var(--accent);
       transform: translateY(-5px);
@@ -1140,7 +1356,7 @@
     }
 
     .copyright {
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
       font-size: 0.95rem;
       margin-top: 1.5rem;
     }
@@ -1166,13 +1382,13 @@
     .stats {
       background: var(--gradient-dark);
       padding: 4rem 2rem;
-      color: var(--white);
+      color: var(--text-color);
       text-align: center;
       margin: 4rem auto;
       border-radius: 20px;
       box-shadow: var(--shadow);
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
     .stats-container {
@@ -1205,19 +1421,19 @@
     /* CTA Section */
     .cta-section {
       background: var(--gradient-dark);
-      color: white;
+      color: var(--text-color);
       text-align: center;
       padding: 5rem 2rem;
       border-radius: 20px;
       margin: 4rem auto;
       max-width: 1200px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
     }
 
     .cta-title {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--primary-light) 0%, var(--accent-light) 100%);
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1229,7 +1445,7 @@
       margin-left: auto;
       margin-right: auto;
       opacity: 0.9;
-      color: var(--dark-text-secondary);
+      color: var(--text-secondary);
     }
 
     .cta-buttons {
@@ -1270,7 +1486,7 @@
         flex-direction: column;
       }
 
-      .case-study-header {
+      .brand-growth-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
@@ -1284,11 +1500,17 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: rgba(15, 23, 42, 0.95);
+        background: rgba(248, 250, 252, 0.95);
         backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        z-index: 999;
+      }
+
+      .dark-mode .nav-links {
+        background: rgba(15, 23, 42, 0.95);
         border-top: 1px solid rgba(255, 255, 255, 0.05);
       }
 
@@ -1298,6 +1520,10 @@
 
       .mobile-menu-btn {
         display: block;
+      }
+
+      .theme-toggle {
+        margin-left: 0;
       }
 
       .hero-title {
@@ -1330,7 +1556,7 @@
       }
 
       .client-card,
-      .case-study-container {
+      .brand-growth-container {
         padding: 2rem;
       }
 
@@ -1369,7 +1595,7 @@
       }
 
       .about-content,
-      .case-study-container {
+      .brand-growth-container {
         padding: 2rem;
       }
 
@@ -1380,13 +1606,17 @@
         grid-template-columns: 1fr;
       }
 
-      .case-study-highlights,
-      .recommendations-grid {
+      .growth-highlights,
+      .growth-pillars {
         grid-template-columns: 1fr;
       }
 
       .cta-title {
         font-size: 2rem;
+      }
+      
+      .logo-img {
+        height: 35px;
       }
     }
   </style>
@@ -1412,19 +1642,25 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="#" class="logo">
-        <i class="fas fa-chart-line"></i>Mwaniki Digital
+        <img src="img/logo.png" alt="NexInk Ltd. Logo" class="logo-img">
       </a>
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#case-studies">Case Studies</a>
-        <a href="#process">Process</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#clients">Clients</a>
+          <a href="#brand-growth">Brand Growth</a>
+          <a href="#process">Process</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -1434,7 +1670,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Drive Business Growth with Data-Driven Social Media & Design</h1>
       <p class="hero-subtitle">
-        I help businesses increase visibility, engagement, and conversions through strategic social media management and
+        We help businesses increase visibility, engagement, and conversions through strategic social media management and
         compelling visual design. Your success is measured in numbers, not just likes.
       </p>
 
@@ -1447,8 +1683,8 @@
         <a href="#contact" class="btn btn-primary">
           <i class="fas fa-calendar-check"></i> Book a Strategy Call
         </a>
-        <a href="#case-studies" class="btn btn-outline">
-          <i class="fas fa-chart-line"></i> View Case Studies
+        <a href="#brand-growth" class="btn btn-outline">
+          <i class="fas fa-chart-line"></i> View Our Approach
         </a>
       </div>
     </div>
@@ -1482,8 +1718,8 @@
 
   <!-- Services Section -->
   <section id="services" class="section">
-    <h2 class="section-title">My Services</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <h2 class="section-title">Our Services</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       Tailored solutions designed to deliver measurable business results. Each package includes detailed analytics and
       performance reporting.
     </p>
@@ -1546,8 +1782,8 @@
   <!-- Client Showcase Section - UPDATED WITH SOCIAL LINKS -->
   <section id="clients" class="section">
     <h2 class="section-title">Client Portfolio</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
-      I manage comprehensive social media strategies across multiple platforms for these businesses, driving engagement,
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
+      We manage comprehensive social media strategies across multiple platforms for these businesses, driving engagement,
       visibility, and conversions.
     </p>
 
@@ -1614,72 +1850,70 @@
     </div>
   </section>
 
-  <!-- Case Study Section -->
-  <section id="case-studies" class="section">
-    <h2 class="section-title">Case Studies</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
-      Real results for real businesses. See how I've helped clients achieve measurable growth.
+  <!-- Brand Growth Section (Replaces Case Studies) -->
+  <section id="brand-growth" class="section">
+    <h2 class="section-title">Strategic Brand Growth</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
+      We specialize in elevating brands through strategic graphic design and targeted digital marketing. Our data-driven approach ensures measurable growth across all online channels.
     </p>
 
-    <div class="case-study-container">
-      <div class="case-study-header">
-        <h3 class="case-study-title">Coffee Garden Suites: Social Media Transformation</h3>
-        <div class="case-study-date">November 4th – Present</div>
+    <div class="brand-growth-container">
+      <div class="brand-growth-header">
+        <h3 class="brand-growth-title">Our Brand Growth Methodology</h3>
+        <div class="brand-growth-subtitle">Proven Results</div>
       </div>
 
-      <div class="case-study-highlights">
+      <div class="growth-highlights">
         <div class="highlight-card">
-          <div class="highlight-value">100%</div>
-          <div class="highlight-label">Increase in Interactions</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Facebook engagement growth</p>
+          <div class="highlight-value">Strategic</div>
+          <div class="highlight-label">Design Approach</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Purpose-driven visual identity</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">308.3%</div>
-          <div class="highlight-label">Increase in Viewers</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Facebook reach expansion</p>
+          <div class="highlight-value">Digital-First</div>
+          <div class="highlight-label">Marketing Strategy</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);>Omnichannel brand presence</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">2,218</div>
-          <div class="highlight-label">Total Views</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">Instagram content performance</p>
+          <div class="highlight-value">Data-Driven</div>
+          <div class="highlight-label">Performance Tracking</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Measurable ROI focus</p>
         </div>
 
         <div class="highlight-card">
-          <div class="highlight-value">59.3%</div>
-          <div class="highlight-label">Non-Follower Reach</div>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--dark-text-secondary);">New audience attraction</p>
+          <div class="highlight-value">Growth-Focused</div>
+          <div class="highlight-label">Results Orientation</div>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-secondary);">Scalable brand expansion</p>
         </div>
       </div>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">The Challenge:</h4>
-      <p style="color: var(--dark-text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
-        Coffee Garden Suites had inconsistent social media presence with low engagement and limited reach. They needed
-        to increase visibility among potential guests and drive direct bookings through their digital channels.
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Our Philosophy:</h4>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
+        At NexInk Ltd., we believe that exceptional brand growth is achieved through the perfect synergy of compelling design and strategic digital marketing. We don't just create visuals—we build brands that resonate, engage, and convert across every digital touchpoint.
       </p>
 
-      <h4 style="color: var(--primary-light); margin-top: 2rem; margin-bottom: 1rem;">Growth Recommendations Implemented:</h4>
-      <div class="recommendations-grid">
-        <div class="recommendation-card">
-          <h4><i class="fas fa-rocket"></i> Content Strategy Overhaul</h4>
-          <p>Developed a content calendar focused on showcasing facilities, guest experiences, and local attractions.
-          </p>
+      <h4 style="color: var(--primary); margin-top: 2rem; margin-bottom: 1rem;">Core Growth Pillars:</h4>
+      <div class="growth-pillars">
+        <div class="pillar-card">
+          <h4><i class="fas fa-paint-brush"></i> Strategic Visual Identity</h4>
+          <p>Developing cohesive brand systems that communicate your unique value proposition and drive recognition across all platforms.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-video"></i> Platform Optimization</h4>
-          <p>Converted TikTok to Business Account for analytics and implemented Instagram Reels strategy.</p>
+        <div class="pillar-card">
+          <h4><i class="fas fa-bullseye"></i> Targeted Digital Campaigns</h4>
+          <p>Precision-targeted marketing strategies that reach your ideal audience through optimized social media and online channels.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-film"></i> Visual Content Creation</h4>
-          <p>Produced professional photos and videos highlighting accommodations and amenities.</p>
+        <div class="pillar-card">
+          <h4><i class="fas fa-chart-line"></i> Performance Optimization</h4>
+          <p>Continuous analysis and refinement of marketing strategies based on real-time data to maximize engagement and conversions.</p>
         </div>
 
-        <div class="recommendation-card">
-          <h4><i class="fas fa-users"></i> Community Building</h4>
-          <p>Implemented engagement strategies and user-generated content campaigns.</p>
+        <div class="pillar-card">
+          <h4><i class="fas fa-expand-alt"></i> Scalable Brand Architecture</h4>
+          <p>Building brand foundations that support sustainable growth and adaptability across evolving market landscapes.</p>
         </div>
       </div>
     </div>
@@ -1687,8 +1921,8 @@
 
   <!-- Process Section -->
   <section id="process" class="section">
-    <h2 class="section-title">My 4-Step Process</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
+    <h2 class="section-title">Our 4-Step Process</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
       A structured approach to ensure your social media and design projects deliver maximum impact.
     </p>
 
@@ -1697,7 +1931,7 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h3>Discovery & Strategy</h3>
-          <p>We begin with an in-depth analysis of your business, target audience, and competitors. I develop a
+          <p>We begin with an in-depth analysis of your business, target audience, and competitors. We develop a
             customized strategy with clear goals, KPIs, and a content roadmap tailored to your objectives.</p>
         </div>
       </div>
@@ -1706,7 +1940,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Creation & Implementation</h3>
-          <p>I create compelling visual content and implement the strategy across your social platforms. This includes
+          <p>We create compelling visual content and implement the strategy across your social platforms. This includes
             content creation, scheduling, community management, and ongoing optimization based on performance.</p>
         </div>
       </div>
@@ -1715,7 +1949,7 @@
         <div class="step-number">3</div>
         <div class="step-content">
           <h3>Analysis & Reporting</h3>
-          <p>Regular tracking of performance metrics with detailed monthly reports. I analyze what's working, identify
+          <p>Regular tracking of performance metrics with detailed monthly reports. We analyze what's working, identify
             opportunities for improvement, and adjust strategies to maximize ROI and growth.</p>
         </div>
       </div>
@@ -1724,7 +1958,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h3>Optimization & Scaling</h3>
-          <p>Based on data insights, I refine and scale successful strategies. We expand what works, test new
+          <p>Based on data insights, we refine and scale successful strategies. We expand what works, test new
             approaches, and continuously improve performance to drive sustained business growth.</p>
         </div>
       </div>
@@ -1734,15 +1968,15 @@
   <!-- Testimonials Section -->
   <section id="testimonials" class="section">
     <h2 class="section-title">Client Testimonials</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--dark-text-secondary); font-size: 1.1rem;">
-      Don't just take my word for it. Here's what my clients have to say.
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
+      Don't just take our word for it. Here's what our clients have to say.
     </p>
 
     <div class="testimonials-container">
       <div class="testimonial-card">
         <div class="testimonial-text">
-          "Jackson transformed our social media presence completely. In just two months, our engagement increased by
-          over 700% and we're seeing more direct bookings through our Instagram. His data-driven approach makes all the
+          "NexInk Ltd. transformed our social media presence completely. In just two months, our engagement increased by
+          over 700% and we're seeing more direct bookings through our Instagram. Their data-driven approach makes all the
           difference."
         </div>
         <div class="testimonial-author">
@@ -1756,8 +1990,8 @@
 
       <div class="testimonial-card">
         <div class="testimonial-text">
-          "The strategic approach to our social media has brought measurable results. Jackson doesn't just post
-          content—he analyzes performance and adjusts strategy to maximize impact. Our visibility has increased
+          "The strategic approach to our social media has brought measurable results. NexInk doesn't just post
+          content—they analyze performance and adjust strategy to maximize impact. Our visibility has increased
           dramatically."
         </div>
         <div class="testimonial-author">
@@ -1773,24 +2007,24 @@
 
   <!-- About Section -->
   <section id="about" class="section">
-    <h2 class="section-title">About My Approach</h2>
+    <h2 class="section-title">About Our Approach</h2>
     <div class="about-content">
       <div class="about-text">
         <p>
-          I'm Munene, Jackson Mwaniki. I bridge the gap between creative marketing and data analytics to deliver
-          measurable business growth for my clients.
+          At NexInk Ltd., we bridge the gap between creative marketing and data analytics to deliver
+          measurable business growth for our clients.
         </p>
         <p>
-          Unlike traditional agencies, I offer a partnership model where your success is my priority. I believe in
+          Unlike traditional agencies, we offer a partnership model where your success is our priority. We believe in
           transparent communication, data-backed strategies, and delivering tangible ROI on your marketing investment.
         </p>
         <p>
-          My background in data science and digital marketing allows me to create strategies that are both creatively
+          Our expertise in data science and digital marketing allows us to create strategies that are both creatively
           compelling and analytically sound. Every decision is informed by data, and every campaign is optimized for
           performance.
         </p>
         <p>
-          <strong>My Commitment:</strong> To provide you with expert social media management and design services that
+          <strong>Our Commitment:</strong> To provide you with expert social media management and design services that
           drive real business results—more leads, more customers, and stronger brand presence.
         </p>
         <div style="margin-top: 2rem;">
@@ -1799,7 +2033,7 @@
       </div>
       <div class="about-image">
         <!-- Replace with your about photo -->
-        <img src="img/c.png" alt="Jackson working" />
+        <img src="img/c.png" alt="NexInk team working" />
       </div>
     </div>
   </section>
@@ -1808,14 +2042,14 @@
   <div class="cta-section">
     <h2 class="cta-title">Ready to Transform Your Digital Presence?</h2>
     <p class="cta-subtitle">
-      Let's discuss how I can help your business achieve measurable growth through strategic social media management and
+      Let's discuss how we can help your business achieve measurable growth through strategic social media management and
       compelling design.
     </p>
     <div class="cta-buttons">
-      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary-light);">
+      <a href="#contact" class="btn btn-outline" style="background: rgba(255, 255, 255, 0.1); color: var(--primary);">
         <i class="fas fa-paper-plane"></i> Start a Project
       </a>
-      <a href="#services" class="btn btn-outline" style="border-color: var(--primary-light); color: var(--primary-light);">
+      <a href="#services" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);">
         <i class="fas fa-list"></i> View Services
       </a>
     </div>
@@ -1832,7 +2066,7 @@
           </div>
           <div class="contact-details">
             <h3>Email</h3>
-            <a href="mailto:jacmwaniki@gmail.com">jacmwaniki@gmail.com</a>
+            <a href="mailto:contact@nexinkltd.com">contact@nexinkltd.com</a>
           </div>
         </div>
         <div class="contact-card">
@@ -1850,7 +2084,7 @@
           </div>
           <div class="contact-details">
             <h3>LinkedIn</h3>
-            <a href="https://www.linkedin.com/in/jackson-mwaniki" target="_blank">linkedin.com/in/jackson-mwaniki</a>
+            <a href="https://www.linkedin.com/company/nexink-ltd" target="_blank">linkedin.com/company/nexink-ltd</a>
           </div>
         </div>
         <div class="contact-card">
@@ -1860,14 +2094,14 @@
           <div class="contact-details">
             <h3>Response Time</h3>
             <p>Typically within 24 hours</p>
-            <p style="font-size: 0.9rem; color: var(--dark-text-secondary);">Monday - Friday, 9AM - 6PM EAT</p>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">Monday - Friday, 9AM - 6PM EAT</p>
           </div>
         </div>
       </div>
       <div class="container">
         <div class="form-header">
           <h1>Get Your Free Strategy Session</h1>
-          <p class="form-subtitle">Tell me about your business goals</p>
+          <p class="form-subtitle">Tell us about your business goals</p>
         </div>
 
         <form id="contactForm" class="contact-form">
@@ -1898,7 +2132,7 @@
           </div>
 
           <div class="form-group">
-            <label for="message">Tell me about your business goals *</label>
+            <label for="message">Tell us about your business goals *</label>
             <textarea id="message" name="message"
               placeholder="What would you like to achieve with your social media and digital presence?"
               required></textarea>
@@ -1920,12 +2154,12 @@
               <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
             <p>Your message has been sent successfully!</p>
-            <p>I'll get back to you within 24 hours to schedule your strategy call.</p>
+            <p>We'll get back to you within 24 hours to schedule your strategy call.</p>
           </div>
 
           <div id="errorMessage" class="error-message"></div>
 
-          <div class="form-footer">All inquiries are confidential. I respect your privacy.</div>
+          <div class="form-footer">All inquiries are confidential. We respect your privacy.</div>
         </form>
       </div>
     </div>
@@ -1933,25 +2167,81 @@
 
   <!-- Footer -->
   <footer class="footer">
+    <img src="img/logo.png" alt="NexInk Ltd. Logo" class="footer-logo">
     <div class="social-links">
-      <a href="https://www.linkedin.com/in/jackson-mwaniki" class="social-link" target="_blank">
+      <a href="https://www.linkedin.com/company/nexink-ltd" class="social-link" target="_blank">
         <i class="fab fa-linkedin-in"></i>
       </a>
-      <a href="https://github.com/jakkkc" class="social-link" target="_blank">
+      <a href="https://github.com/nexinkltd" class="social-link" target="_blank">
         <i class="fab fa-github"></i>
       </a>
-      <a href="mailto:jacmwaniki@gmail.com" class="social-link">
+      <a href="mailto:contact@nexinkltd.com" class="social-link">
         <i class="fas fa-envelope"></i>
       </a>
       <a href="tel:+254742881370" class="social-link">
         <i class="fas fa-phone"></i>
       </a>
     </div>
-    <p class="copyright">© 2025 Mwaniki Digital. All rights reserved. | Designed to drive business growth.</p>
+    <p class="copyright">© 2025 NexInk Ltd. All rights reserved. | Designed to drive business growth.</p>
   </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+
+      // Check for saved theme preference or prefer-color-scheme
+      function getPreferredTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) return savedTheme;
+        
+        // Check for system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
+
+      // Set initial theme
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          document.body.classList.add('dark-mode');
+          themeIcon.className = 'fas fa-sun';
+          themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+          themeIcon.className = 'fas fa-moon';
+          themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        }
+        localStorage.setItem('theme', theme);
+      }
+
+      // Initialize theme
+      const currentTheme = getPreferredTheme();
+      setTheme(currentTheme);
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('dark-mode');
+        setTheme(isDark ? 'light' : 'dark');
+        
+        // Add a subtle animation effect
+        themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
+        setTimeout(() => {
+          themeToggle.style.transform = '';
+        }, 300);
+      });
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        // Only auto-switch if user hasn't manually set a preference
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      // Existing functionality
       const contactForm = document.getElementById("contactForm");
       const successMessage = document.getElementById("successMessage");
       const errorMessage = document.getElementById("errorMessage");
@@ -2112,5 +2402,4 @@
     });
   </script>
 </body>
-
 </html>
