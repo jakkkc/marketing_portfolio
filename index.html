@@ -82,6 +82,36 @@
       transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* ===== CREATIVE MOUSE EFFECT ===== */
+    #mouse-trail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .trail-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      pointer-events: none;
+      opacity: 0.7;
+      transition: transform 0.3s ease, opacity 0.5s ease;
+      mix-blend-mode: screen;
+      z-index: -1;
+    }
+
+    .dark-mode .trail-particle {
+      background: var(--primary-light);
+      mix-blend-mode: difference;
+      opacity: 0.8;
+    }
+
     /* Enhanced Dynamic Background Animation */
     .background-shapes {
       position: fixed;
@@ -341,6 +371,108 @@
       -webkit-backdrop-filter: blur(15px);
     }
 
+    /* ===== ANIMATED SOCIAL HANDLES AROUND IMAGES ===== */
+    .hero-image {
+      position: relative;
+    }
+
+    .social-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 450px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .orbiting-social {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+      box-shadow: var(--shadow-hover);
+      pointer-events: auto;
+      animation: orbit 20s linear infinite;
+      transition: all 0.3s ease;
+      z-index: 3;
+    }
+
+    .orbiting-social:hover {
+      transform: scale(1.2);
+      z-index: 10;
+    }
+
+    .orbiting-social:nth-child(1) {
+      background: #1877F2; /* Facebook */
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .orbiting-social:nth-child(2) {
+      background: linear-gradient(45deg, #405DE6, #5B51D8, #833AB4, #C13584, #E1306C, #FD1D1D); /* Instagram */
+      animation-delay: -5s;
+      animation-duration: 22s;
+    }
+
+    .orbiting-social:nth-child(3) {
+      background: #000000; /* TikTok */
+      animation-delay: -10s;
+      animation-duration: 20s;
+    }
+
+    .orbiting-social:nth-child(4) {
+      background: #0A66C2; /* LinkedIn */
+      animation-delay: -15s;
+      animation-duration: 24s;
+    }
+
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translate(200px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translate(200px) rotate(-360deg);
+      }
+    }
+
+    /* ===== 3D TEXT EFFECT ===== */
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 
+        2px 2px 0 rgba(0, 0, 0, 0.1),
+        4px 4px 0 rgba(0, 0, 0, 0.05),
+        6px 6px 0 rgba(0, 0, 0, 0.025),
+        8px 8px 15px rgba(0, 0, 0, 0.1);
+      transform: perspective(1000px) rotateX(10deg) translateZ(50px);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .dark-mode .hero-title {
+      text-shadow: 
+        2px 2px 0 rgba(255, 255, 255, 0.05),
+        4px 4px 0 rgba(255, 255, 255, 0.025),
+        6px 6px 0 rgba(255, 255, 255, 0.0125),
+        8px 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-title:hover {
+      transform: perspective(1000px) rotateX(5deg) translateZ(80px) scale(1.02);
+    }
+
     /* Navigation */
     .navbar {
       background: rgba(248, 250, 252, 0.8);
@@ -494,16 +626,6 @@
       z-index: 2;
     }
 
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
     .hero-subtitle {
       font-size: 1.35rem;
       color: var(--text-secondary);
@@ -591,6 +713,8 @@
       border: 5px solid var(--glass-border);
       transition: var(--transition);
       background: var(--surface-color);
+      position: relative;
+      z-index: 1;
     }
 
     .hero-image:hover .profile-pic {
@@ -704,7 +828,7 @@
       font-size: 0.9rem;
     }
 
-    /* Client Portfolio Section - ORIGINAL INTACT */
+    /* Client Portfolio Section */
     .clients-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1588,6 +1712,7 @@
 
       .hero-title {
         font-size: 2.5rem;
+        transform: perspective(800px) rotateX(5deg) translateZ(30px);
       }
 
       .hero-subtitle {
@@ -1628,6 +1753,27 @@
       .business-type-grid {
         grid-template-columns: 1fr;
       }
+
+      /* Adjust social orbit for mobile */
+      .social-orbit {
+        width: 300px;
+        height: 300px;
+      }
+
+      .orbiting-social {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: rotate(0deg) translate(140px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translate(140px) rotate(-360deg);
+        }
+      }
     }
 
     @media (max-width: 576px) {
@@ -1637,6 +1783,7 @@
 
       .hero-title {
         font-size: 2.2rem;
+        transform: perspective(600px) rotateX(3deg) translateZ(20px);
       }
 
       .hero-cta {
@@ -1677,11 +1824,35 @@
       .cta-title {
         font-size: 2rem;
       }
+
+      /* Further adjust social orbit for small mobile */
+      .social-orbit {
+        width: 250px;
+        height: 250px;
+      }
+
+      .orbiting-social {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: rotate(0deg) translate(110px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translate(110px) rotate(-360deg);
+        }
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- Mouse Trail Canvas -->
+  <div id="mouse-trail"></div>
+
   <!-- Enhanced Dynamic Background with more shapes -->
   <div class="background-shapes">
     <div class="shape shape-1"></div>
@@ -1755,6 +1926,21 @@
     </div>
     <div class="hero-image">
       <img src="img/a.png" alt="Jackson Mwaniki" class="profile-pic" />
+      <!-- Animated Social Handles -->
+      <div class="social-orbit">
+        <a href="https://facebook.com" target="_blank" class="orbiting-social">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="orbiting-social">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="orbiting-social">
+          <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" class="orbiting-social">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1893,7 +2079,7 @@
     </div>
   </section>
 
-  <!-- Client Portfolio Section - ORIGINAL INTACT -->
+  <!-- Client Portfolio Section -->
   <section id="clients" class="section">
     <h2 class="section-title">Client Portfolio</h2>
     <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary); font-size: 1.1rem;">
@@ -2276,6 +2462,80 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      // ===== CREATIVE MOUSE EFFECT =====
+      const mouseTrail = document.getElementById('mouse-trail');
+      const particles = [];
+      const particleCount = 20;
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      // Create particles
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'trail-particle';
+        particle.style.opacity = '0';
+        mouseTrail.appendChild(particle);
+        particles.push({
+          element: particle,
+          x: 0,
+          y: 0,
+          size: Math.random() * 10 + 5,
+          speedX: Math.random() * 3 - 1.5,
+          speedY: Math.random() * 3 - 1.5,
+          life: 0,
+          maxLife: Math.random() * 30 + 20
+        });
+      }
+      
+      // Mouse move handler
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Create new particle trail
+        particles.forEach(particle => {
+          if (particle.life <= 0) {
+            particle.x = mouseX + (Math.random() * 40 - 20);
+            particle.y = mouseY + (Math.random() * 40 - 20);
+            particle.life = particle.maxLife;
+            particle.speedX = Math.random() * 3 - 1.5;
+            particle.speedY = Math.random() * 3 - 1.5;
+            
+            // Adjust color based on theme
+            const isDark = document.body.classList.contains('dark-mode');
+            const hue = isDark ? 195 : 200; // Slightly different hue for contrast
+            const saturation = isDark ? 70 : 90;
+            const lightness = isDark ? 60 : 50;
+            particle.element.style.background = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            particle.element.style.boxShadow = `0 0 10px hsl(${hue}, ${saturation}%, ${lightness}%)`;
+          }
+        });
+      });
+      
+      // Animate particles
+      function animateParticles() {
+        particles.forEach(particle => {
+          if (particle.life > 0) {
+            particle.life--;
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+            
+            // Apply gravity and fade
+            particle.speedY += 0.1;
+            const scale = particle.life / particle.maxLife;
+            particle.element.style.transform = `translate(${particle.x}px, ${particle.y}px) scale(${scale})`;
+            particle.element.style.opacity = scale;
+            particle.element.style.width = `${particle.size}px`;
+            particle.element.style.height = `${particle.size}px`;
+          } else {
+            particle.element.style.opacity = '0';
+          }
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      
+      animateParticles();
+
       // Theme toggle functionality
       const themeToggle = document.getElementById('themeToggle');
       const themeIcon = themeToggle.querySelector('i');
@@ -2493,8 +2753,27 @@
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         cardObserver.observe(card);
       });
+
+      // ===== ANIMATE SOCIAL HANDLES ON HOVER =====
+      const orbitingSocials = document.querySelectorAll('.orbiting-social');
+      orbitingSocials.forEach(social => {
+        social.addEventListener('mouseenter', () => {
+          orbitingSocials.forEach(other => {
+            if (other !== social) {
+              other.style.animationPlayState = 'paused';
+              other.style.filter = 'blur(2px)';
+            }
+          });
+        });
+        
+        social.addEventListener('mouseleave', () => {
+          orbitingSocials.forEach(other => {
+            other.style.animationPlayState = 'running';
+            other.style.filter = 'blur(0)';
+          });
+        });
+      });
     });
   </script>
 </body>
-
 </html>
